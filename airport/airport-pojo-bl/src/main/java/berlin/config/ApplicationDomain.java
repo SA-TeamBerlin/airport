@@ -10,6 +10,7 @@ import berlin.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
+import berlin.tablecodes.assets.AssetClass;
 
 /**
  * A class to register domain entities.
@@ -18,28 +19,29 @@ import ua.com.fielden.platform.entity.AbstractEntity;
  * 
  */
 public class ApplicationDomain implements IApplicationDomainProvider {
-    private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
-    private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
+	private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
+	private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
-    private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-        entityTypes.add(domainType);
-        domainTypes.add(domainType);
-    }
+	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
+		entityTypes.add(domainType);
+		domainTypes.add(domainType);
+	}
 
-    /**
-     * This is a static initialisation block where all entity types should be registered.
-     */
-    static {
-        entityTypes.addAll(PlatformDomainTypes.types);
-        add(Person.class);
-    }
-    
-    @Override
-    public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
-    }
+	/**
+	     * This is a static initialisation block where all entity types should be registered.
+	     */
+	static {
+		entityTypes.addAll(PlatformDomainTypes.types);
+		add(Person.class);
+		add(AssetClass.class);
+	}
 
-    public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
-    }
+	@Override
+	public List<Class<? extends AbstractEntity<?>>> entityTypes() {
+		return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+	}
+
+	public List<Class<? extends AbstractEntity<?>>> domainTypes() {
+		return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+	}
 }
