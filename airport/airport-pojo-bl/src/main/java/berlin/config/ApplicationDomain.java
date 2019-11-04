@@ -12,6 +12,7 @@ import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.assets.Asset;
 
 /**
  * A class to register domain entities.
@@ -29,13 +30,14 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 	}
 
 	/**
-		     * This is a static initialisation block where all entity types should be registered.
-		     */
+			     * This is a static initialisation block where all entity types should be registered.
+			     */
 	static {
 		entityTypes.addAll(PlatformDomainTypes.types);
 		add(Person.class);
 		add(AssetClass.class);
 		add(AssetType.class);
+		add(Asset.class);
 	}
 
 	@Override

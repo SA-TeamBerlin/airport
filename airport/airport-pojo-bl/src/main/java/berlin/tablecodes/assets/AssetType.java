@@ -59,19 +59,21 @@ public class AssetType extends ActivatableAbstractEntity<DynamicEntityKey> {
         return assetClass;
     }
 
-    
-
-
     @Observable
     public AssetType setName(final String name) {
         this.name = name;
+        return this;
+    }
+    
+    @Override
+    @Observable
+    public AssetType setDesc(String desc) {
+        super.setDesc(desc);
         return this;
     }
 
     public String getName() {
         return name;
     }
-
-    
 
 }
