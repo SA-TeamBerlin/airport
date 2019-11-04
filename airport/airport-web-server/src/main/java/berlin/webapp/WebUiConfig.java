@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
@@ -76,6 +77,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final AssetClassWebUiConfig assetClassWebUiConfig = AssetClassWebUiConfig.register(injector(), builder);
         
         final AssetTypeWebUiConfig assetTypeWebUiConfig = AssetTypeWebUiConfig.register(injector(), builder);
+        
+        final AssetWebUiConfig assetWebUiConfig = AssetWebUiConfig.register(injector(), builder);
 
 
         // Configure application web resources such as masters and centres
