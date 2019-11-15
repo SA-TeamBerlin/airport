@@ -6,9 +6,13 @@ import berlin.assets.Asset;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.conditions.ConditionRating;
+import berlin.tablecodes.services.ServiceStatus;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
+import berlin.webapp.config.tablecodes.conditions.ConditionRatingWebUiConfig;
+import berlin.webapp.config.tablecodes.services.ServiceStatusWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
@@ -79,6 +83,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final AssetTypeWebUiConfig assetTypeWebUiConfig = AssetTypeWebUiConfig.register(injector(), builder);
         // Asset
         final AssetWebUiConfig assetWebUiConfig = AssetWebUiConfig.register(injector(), builder);
+        // Service Status
+        final ServiceStatusWebUiConfig serviceStatusWebUiConfig = ServiceStatusWebUiConfig.register(injector(), builder);
+        // Condition rating
+        final ConditionRatingWebUiConfig conditionRatingWebUiConfig = ConditionRatingWebUiConfig.register(injector(), builder);
 
 
         // Configure application web resources such as masters and centres
@@ -127,6 +135,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .centre(assetClassWebUiConfig.centre).done()
                     .addMenuItem(AssetType.ENTITY_TITLE).description(String.format("%s Centre", AssetType.ENTITY_TITLE))
                     .centre(assetTypeWebUiConfig.centre).done()
+                    .addMenuItem(ServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", ServiceStatus.ENTITY_TITLE))
+                    .centre(serviceStatusWebUiConfig.centre).done()
+                    .addMenuItem(ConditionRating.ENTITY_TITLE).description(String.format("%s Centre", ConditionRating.ENTITY_TITLE))
+                    .centre(conditionRatingWebUiConfig.centre).done()
                 .done().
             done().done()
         .setLayoutFor(Device.DESKTOP, null, "[[[{\"rowspan\":2}], []], [[]]]")
