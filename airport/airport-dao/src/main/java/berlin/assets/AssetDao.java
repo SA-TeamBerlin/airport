@@ -1,5 +1,6 @@
 package berlin.assets;
 
+import java.awt.IllegalComponentStateException;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import ua.com.fielden.platform.entity.annotation.EntityType;
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.entity.query.IFilter;
+import ua.com.fielden.platform.error.Result;
 import ua.com.fielden.platform.keygen.IKeyNumber;
 import ua.com.fielden.platform.keygen.KeyNumber;
 
@@ -31,13 +33,24 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
     @Override
     @SessionRequired
     public Asset save(final Asset asset) {
-        // TODO implement a solution for a failed transaction where ID was already assigned
-        if (!asset.isPersisted()) {
-            final IKeyNumber coKeyNumber = co(KeyNumber.class);
-            final Integer nextNumber = coKeyNumber.nextNumber("ASSET_NUMBER");
-            asset.setNumber(nextNumber.toString());
+        // implement a solution for a failed transaction where ID was already assigned
+        final boolean isDefaultNumber = DEFAULT_ASSET_NUMBER.equals(asset.getNumber());
+        try {
+            if (!isDefaultNumber) {
+                final IKeyNumber coKeyNumber = co(KeyNumber.class);
+                final Integer nextNumber = coKeyNumber.nextNumber("ASSET_NUMBER");
+                asset.setNumber(nextNumber.toString());
+            }
+            
+            final Asset savedAsset = super.save(asset);
+            return savedAsset;
+            //throw new IllegalComponentStateException("This is to force the rollback of a database transaction.");
+        } catch (final Exception ex) {
+            if (!isDefaultNumber) {
+                asset.setNumber(DEFAULT_ASSET_NUMBER);
+            }
+            throw Result.failure(ex);
         }
-        return super.save(asset);
     }
 
     @Override
