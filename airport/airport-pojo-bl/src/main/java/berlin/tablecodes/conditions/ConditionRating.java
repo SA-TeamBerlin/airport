@@ -43,12 +43,12 @@ public class ConditionRating extends AbstractPersistentEntity<DynamicEntityKey> 
     private Integer condition;
 
     @Observable
-    public ConditionRating setName(final Integer condition) {
+    public ConditionRating setCondition(final Integer condition) {
         this.condition = condition;
         return this;
     }
 
-    public Integer getName() {
+    public Integer getCondition() {
         return condition;
     }
     
