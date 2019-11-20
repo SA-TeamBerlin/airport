@@ -1,5 +1,6 @@
 package berlin.assets;
 
+import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -54,6 +55,12 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return number;
     }
 
+    @Override
+    @Observable
+    public Asset setDesc(final String desc) {
+        super.setDesc(desc);
+        return this;
+    }
     
 
 

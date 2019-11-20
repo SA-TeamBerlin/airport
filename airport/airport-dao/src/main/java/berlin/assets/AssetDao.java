@@ -24,7 +24,7 @@ import ua.com.fielden.platform.keygen.KeyNumber;
 @EntityType(Asset.class)
 public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
     public static final String DEFAULT_ASSET_NUMBER = "NEXT NUMBER WILL BE GENERATED UPON SAVE";
-
+    public static final String ERR_FAILED_SAVE = "Deliberate throw exception."; 
     @Inject
     public AssetDao(final IFilter filter) {
         super(filter);
@@ -34,23 +34,18 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
     @SessionRequired
     public Asset save(final Asset asset) {
         // implement a solution for a failed transaction where ID was already assigned
-        final boolean isDefaultNumber = DEFAULT_ASSET_NUMBER.equals(asset.getNumber());
-        try {
-            if (!isDefaultNumber) {
-                final IKeyNumber coKeyNumber = co(KeyNumber.class);
-                final Integer nextNumber = coKeyNumber.nextNumber("ASSET_NUMBER");
-                asset.setNumber(nextNumber.toString());
-            }
-            
-            final Asset savedAsset = super.save(asset);
-            return savedAsset;
-            //throw new IllegalComponentStateException("This is to force the rollback of a database transaction.");
-        } catch (final Exception ex) {
-            if (!isDefaultNumber) {
-                asset.setNumber(DEFAULT_ASSET_NUMBER);
-            }
-            throw Result.failure(ex);
+        if (!asset.isPersisted()) {
+            final IKeyNumber coKeyNumber = co(KeyNumber.class);
+            final Integer nextNumber = coKeyNumber.nextNumber("ASSET_NUMBER");
+            asset.setNumber(nextNumber.toString());
         }
+        return super.save(asset);
+    }
+    
+    @SessionRequired
+    public Asset saveWithError(final Asset asset) {
+        save(asset);
+        throw Result.failure(ERR_FAILED_SAVE);
     }
 
     @Override
