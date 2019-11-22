@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import berlin.tablecodes.conditions.ConditionRating;
+import berlin.tablecodes.services.ServiceStatus;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
 
@@ -71,6 +72,7 @@ public class ConditionRatingWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(ConditionRating.class).also()
+                .addCrit("condition").asRange().integer().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
@@ -97,7 +99,7 @@ public class ConditionRatingWebUiConfig {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
 
         final IMaster<ConditionRating> masterConfig = new SimpleMasterBuilder<ConditionRating>().forEntity(ConditionRating.class)
-                .addProp("condition").asSinglelineText().also()
+                .addProp("condition").asDecimal().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
