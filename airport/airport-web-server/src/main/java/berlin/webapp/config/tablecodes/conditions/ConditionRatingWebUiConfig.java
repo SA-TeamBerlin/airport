@@ -8,7 +8,6 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import berlin.tablecodes.conditions.ConditionRating;
-import berlin.tablecodes.services.ServiceStatus;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
 
