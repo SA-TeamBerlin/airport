@@ -26,7 +26,7 @@ public class AssetDaoTest extends AbstractDaoTestCase {
         final Asset savedAsset = co$.save(asset);
         
         assertNotNull(savedAsset.getNumber());
-        assertEquals("1", savedAsset.getNumber());
+        assertEquals("000001", savedAsset.getNumber());
     }
     
     @Test
@@ -38,7 +38,7 @@ public class AssetDaoTest extends AbstractDaoTestCase {
         assertTrue(savedAsset.isDirty());
         
         final Asset savedAsset2 = co$.save(savedAsset);
-        assertEquals("1", savedAsset2.getNumber());
+        assertEquals("000001", savedAsset2.getNumber());
     }
     
     @Test
@@ -47,8 +47,8 @@ public class AssetDaoTest extends AbstractDaoTestCase {
         final Asset asset1 = co$.save(co$.new_().setDesc("asset 1 description"));
         final Asset asset2 = co$.save(co$.new_().setDesc("asset 2 description"));
         
-        assertEquals("1", asset1.getNumber());
-        assertEquals("2", asset2.getNumber());
+        assertEquals("000001", asset1.getNumber());
+        assertEquals("000002", asset2.getNumber());
     }
     
     @Test
@@ -65,12 +65,12 @@ public class AssetDaoTest extends AbstractDaoTestCase {
         }
         
         assertFalse(asset.isPersisted());
-        assertEquals("1", asset.getNumber());
+        assertEquals("000001", asset.getNumber());
         
         final Asset savedAsset = co$.save(asset);
         assertTrue(savedAsset.isPersisted());
         assertTrue(co$.entityExists(savedAsset));
-        assertEquals("1", savedAsset.getNumber());
+        assertEquals("000001", savedAsset.getNumber());
     }
     
     @Test
@@ -88,19 +88,19 @@ public class AssetDaoTest extends AbstractDaoTestCase {
         
         assertFalse(assetByUser1.isPersisted());
         assertFalse(co$.entityExists(assetByUser1));
-        assertEquals("1", assetByUser1.getNumber());
+        assertEquals("000001", assetByUser1.getNumber());
         
         // another user saves some asset concurrently
         final Asset assetSavedByUser2 = co$.save(co$.new_().setDesc("another new desc"));
         assertTrue(assetSavedByUser2.isPersisted());
         assertTrue(co$.entityExists(assetSavedByUser2));
-        assertEquals("1", assetSavedByUser2.getNumber());
+        assertEquals("000001", assetSavedByUser2.getNumber());
         
         // another attempt by user 1 to save the failed asset
         final Asset savedAssetByUser1 = co$.save(assetByUser1);
         assertTrue(savedAssetByUser1.isPersisted());
         assertTrue(co$.entityExists(savedAssetByUser1));
-        assertEquals("2", savedAssetByUser1.getNumber());
+        assertEquals("000002", savedAssetByUser1.getNumber());
     }
 
     @Override
