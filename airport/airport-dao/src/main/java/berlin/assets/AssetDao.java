@@ -55,7 +55,6 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
         } catch (final Exception ex) {
             if (!persisted) {
                 asset.setNumber(DEFAULT_ASSET_NUMBER);
-                asset.set(AbstractEntity.ID, null);
             }
             throw Result.failure(ex);
         }

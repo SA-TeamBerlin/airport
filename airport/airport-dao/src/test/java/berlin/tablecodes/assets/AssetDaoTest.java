@@ -110,7 +110,7 @@ public class AssetDaoTest extends AbstractDaoTestCase {
 
     @Override
     public boolean useSavedDataPopulationScript() {
-        return true;
+        return false;
     }
 
     @Override
