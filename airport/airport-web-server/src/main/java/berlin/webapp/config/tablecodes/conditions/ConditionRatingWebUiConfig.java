@@ -54,7 +54,7 @@ public class ConditionRatingWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<ConditionRating> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(ConditionRating.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(ConditionRating.class);
@@ -71,6 +71,7 @@ public class ConditionRatingWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(ConditionRating.class).also()
+                .addCrit("condition").asRange().integer().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
@@ -94,10 +95,10 @@ public class ConditionRatingWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<ConditionRating> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
 
         final IMaster<ConditionRating> masterConfig = new SimpleMasterBuilder<ConditionRating>().forEntity(ConditionRating.class)
-                .addProp("condition").asSinglelineText().also()
+                .addProp("condition").asSpinner().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
@@ -105,7 +106,7 @@ public class ConditionRatingWebUiConfig {
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
-                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 480, Unit.PX))
+                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 280, Unit.PX))
                 .done();
 
         return new EntityMaster<>(ConditionRating.class, masterConfig, injector);
