@@ -1,6 +1,5 @@
 package berlin.assets;
 
-import berlin.tablecodes.conditions.ConditionRating;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -43,24 +42,22 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Title(value = "Number", desc = "A unique asset number, auto-generated.")
     @CompositeKeyMember(1)
     @Readonly
-    private String number;
-
+    private String number;    
+    
     @IsProperty
     @MapTo
-    @Title(value = "Condition Rating", desc = "Condition rating for an asset")
-    private ConditionRating conditionRating;
+    @Title(value = "Asset Type", desc = "Asset Type of an Asset")
+    private Asset assetType;
 
     @Observable
-    public Asset setConditionRating(final ConditionRating conditionRating) {
-        this.conditionRating = conditionRating;
+    public Asset setAssetType(final Asset assetType) {
+        this.assetType = assetType;
         return this;
     }
 
-    public ConditionRating getConditionRating() {
-        return conditionRating;
+    public Asset getAssetType() {
+        return assetType;
     }
-
-    
 
     @Observable
     public Asset setNumber(final String number) {
@@ -78,7 +75,5 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         super.setDesc(desc);
         return this;
     }
-    
-
 
 }
