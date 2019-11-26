@@ -3,15 +3,13 @@ package berlin.assets;
 import java.util.Collection;
 import java.util.List;
 
-import javax.mail.IllegalWriteException;
-
 import org.apache.commons.lang.StringUtils;
 
 import com.google.inject.Inject;
 
+import berlin.exceptions.AssetAcquisitionModuleException;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
-import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.entity.annotation.EntityType;
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.entity.query.IFilter;
@@ -49,7 +47,7 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
         try {
             final Asset savedAsset = super.save(asset);
             if(exceptionThrown) {
-                throw new IllegalWriteException(ERR_FAILED_SAVE);
+                throw new AssetAcquisitionModuleException(ERR_FAILED_SAVE);
             }
             return savedAsset;
         } catch (final Exception ex) {
