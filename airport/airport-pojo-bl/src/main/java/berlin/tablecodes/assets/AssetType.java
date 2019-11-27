@@ -48,7 +48,7 @@ public class AssetType extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
     @MapTo
-    @Title(value = "Condition Rating", desc = "Condition rating for an asset")
+    @Title(value = "Condition Rating", desc = "Condition rating for assets of this type")
     private ConditionRating conditionRating;
 
     @Observable

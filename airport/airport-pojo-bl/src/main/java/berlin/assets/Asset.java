@@ -1,5 +1,6 @@
 package berlin.assets;
 
+import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -46,16 +47,15 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
     @MapTo
-    @Title(value = "Asset Type", desc = "Asset Type of an Asset")
-    private Asset assetType;
+    private AssetType assetType;
 
     @Observable
-    public Asset setAssetType(final Asset assetType) {
+    public Asset setAssetType(final AssetType assetType) {
         this.assetType = assetType;
         return this;
     }
 
-    public Asset getAssetType() {
+    public AssetType getAssetType() {
         return assetType;
     }
 
