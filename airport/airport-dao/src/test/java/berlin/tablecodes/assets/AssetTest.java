@@ -13,7 +13,7 @@ import ua.com.fielden.platform.utils.IUniversalConstants;
 public class AssetTest extends AbstractDaoTestCase {
 
     @Test
-    public void property_title_is_assigned() {
+    public void property_title_is_determined_correctly_even_without_title_annotation() {
         assertEquals(AssetType.ENTITY_TITLE, co$(Asset.class).new_().getProperty("assetType").getTitle());
     }
     
