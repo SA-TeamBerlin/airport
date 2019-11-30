@@ -71,7 +71,7 @@ public class CapexWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(Capex.class).also()
-                .addCrit("amount").asRange().integer().also()
+                .addCrit("amount").asRange().decimal().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
@@ -98,7 +98,7 @@ public class CapexWebUiConfig {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
 
         final IMaster<Capex> masterConfig = new SimpleMasterBuilder<Capex>().forEntity(Capex.class)
-        		.addProp("amount").asSpinner().also()
+        		.addProp("amount").asMoney().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)

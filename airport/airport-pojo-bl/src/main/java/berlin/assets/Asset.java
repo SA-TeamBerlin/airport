@@ -1,6 +1,7 @@
 package berlin.assets;
 
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.capex.Capex;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -76,4 +77,17 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return this;
     }
 
+    @IsProperty
+    @MapTo
+    private Capex capex;
+
+    @Observable
+    public Asset setCapex(final Capex capex) {
+        this.capex = capex;
+        return this;
+    }
+
+    public Capex getCapex() {
+        return capex;
+    }
 }

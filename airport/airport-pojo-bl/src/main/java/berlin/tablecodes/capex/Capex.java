@@ -15,6 +15,7 @@ import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
+import ua.com.fielden.platform.types.Money;
 import ua.com.fielden.platform.utils.Pair;
 
 /**
@@ -40,15 +41,15 @@ public class Capex extends AbstractPersistentEntity<DynamicEntityKey> {
     @MapTo
     @Title(value = "Capex", desc = "Desc for a Capex")
     @CompositeKeyMember(1)
-    private Integer amount;
+    private Money amount;
 
     @Observable
-    public Capex setAmount(final Integer amount) {
+    public Capex setAmount(final Money amount) {
         this.amount = amount;
         return this;
     }
 
-    public Integer getAmount() {
+    public Money getAmount() {
         return amount;
     }
 
