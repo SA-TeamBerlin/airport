@@ -18,7 +18,6 @@ import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenMain_Me
 import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenAssetType_MenuItem;
 import berlin.tablecodes.services.ServiceStatus;
 import berlin.tablecodes.conditions.ConditionRating;
-import berlin.tablecodes.capex.Capex;
 
 /**
  * A class to register domain entities.
@@ -49,7 +48,6 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(AssetClassMaster_OpenAssetType_MenuItem.class);
 		add(ServiceStatus.class);
 		add(ConditionRating.class);
-		add(Capex.class);
 	}
 
 	@Override
