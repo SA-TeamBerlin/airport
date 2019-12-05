@@ -75,5 +75,4 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         super.setDesc(desc);
         return this;
     }
-
 }

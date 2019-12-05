@@ -88,7 +88,6 @@ public class WebUiConfig extends AbstractWebUiConfig {
         // Condition rating
         final ConditionRatingWebUiConfig conditionRatingWebUiConfig = ConditionRatingWebUiConfig.register(injector(), builder);
 
-
         // Configure application web resources such as masters and centres
         configApp()
         .addMaster(userWebUiConfig.master)
