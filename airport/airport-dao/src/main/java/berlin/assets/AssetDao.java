@@ -46,6 +46,10 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
         }
         try {
             final Asset savedAsset = super.save(asset);
+            if (!persisted) {
+                final AssetFinDet finDet = co(AssetFinDet.class).new_().setKey(savedAsset);
+                co$(AssetFinDet.class).save(finDet);
+            }
             if(exceptionThrown) {
                 throw new AssetAcquisitionModuleException(ERR_FAILED_SAVE);
             }
