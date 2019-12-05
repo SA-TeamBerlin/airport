@@ -3,11 +3,13 @@ package berlin.webapp;
 import org.apache.commons.lang.StringUtils;
 
 import berlin.assets.Asset;
+import berlin.assets.AssetFinDet;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
 import berlin.tablecodes.conditions.ConditionRating;
 import berlin.tablecodes.services.ServiceStatus;
+import berlin.webapp.config.assets.AssetFinDetWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
@@ -87,6 +89,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final ServiceStatusWebUiConfig serviceStatusWebUiConfig = ServiceStatusWebUiConfig.register(injector(), builder);
         // Condition rating
         final ConditionRatingWebUiConfig conditionRatingWebUiConfig = ConditionRatingWebUiConfig.register(injector(), builder);
+        // Financial details
+        final AssetFinDetWebUiConfig assetFinDetWebUiConfig = AssetFinDetWebUiConfig.register(injector(), builder);
 
         // Configure application web resources such as masters and centres
         configApp()
@@ -108,6 +112,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
             captionBgColor("#FFD42A").menu()
                 .addMenuItem(Asset.ENTITY_TITLE).description(String.format("%s Centre", Asset.ENTITY_TITLE))
                 .centre(assetWebUiConfig.centre).done()
+                .addMenuItem(AssetFinDet.ENTITY_TITLE).description(String.format("%s Centre", AssetFinDet.ENTITY_TITLE))
+                .centre(assetFinDetWebUiConfig.centre).done()
                 .done().done().
             addModule("Users / Personnel").
                 description("Provides functionality for managing application security and personnel data.").
