@@ -1,8 +1,8 @@
 package berlin.assets;
 
-import java.sql.Date;
 
-import ua.com.fielden.platform.entity.AbstractEntity;
+import java.util.Date;
+
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.DateOnly;
