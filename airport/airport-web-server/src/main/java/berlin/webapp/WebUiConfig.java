@@ -8,12 +8,18 @@ import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
 import berlin.tablecodes.conditions.ConditionRating;
+import berlin.tablecodes.owners.BusinessUnit;
+import berlin.tablecodes.owners.Organisation;
+import berlin.tablecodes.owners.Role;
 import berlin.tablecodes.services.ServiceStatus;
 import berlin.webapp.config.assets.AssetFinDetWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
 import berlin.webapp.config.tablecodes.conditions.ConditionRatingWebUiConfig;
+import berlin.webapp.config.tablecodes.owners.BusinessUnitWebUiConfig;
+import berlin.webapp.config.tablecodes.owners.OrganisationWebUiConfig;
+import berlin.webapp.config.tablecodes.owners.RoleWebUiConfig;
 import berlin.webapp.config.tablecodes.services.ServiceStatusWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -91,6 +97,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final ConditionRatingWebUiConfig conditionRatingWebUiConfig = ConditionRatingWebUiConfig.register(injector(), builder);
         // Financial details
         final AssetFinDetWebUiConfig assetFinDetWebUiConfig = AssetFinDetWebUiConfig.register(injector(), builder);
+        // Owners
+        final RoleWebUiConfig roleWebUiConfig = RoleWebUiConfig.register(injector(), builder);
+        final BusinessUnitWebUiConfig businessUnitWebUiConfig = BusinessUnitWebUiConfig.register(injector(), builder);
+        final OrganisationWebUiConfig organisationWebUiConfig = OrganisationWebUiConfig.register(injector(), builder);
 
         // Configure application web resources such as masters and centres
         configApp()
@@ -144,6 +154,12 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .centre(serviceStatusWebUiConfig.centre).done()
                     .addMenuItem(ConditionRating.ENTITY_TITLE).description(String.format("%s Centre", ConditionRating.ENTITY_TITLE))
                     .centre(conditionRatingWebUiConfig.centre).done()
+                    .addMenuItem(Role.ENTITY_TITLE).description(String.format("%s Centre", Role.ENTITY_TITLE))
+                    .centre(roleWebUiConfig.centre).done()
+                    .addMenuItem(BusinessUnit.ENTITY_TITLE).description(String.format("%s Centre", BusinessUnit.ENTITY_TITLE))
+                    .centre(businessUnitWebUiConfig.centre).done()
+                    .addMenuItem(Organisation.ENTITY_TITLE).description(String.format("%s Centre", Organisation.ENTITY_TITLE))
+                    .centre(organisationWebUiConfig.centre).done()
                 .done().
             done().done()
         .setLayoutFor(Device.DESKTOP, null, "[[[{\"rowspan\":2}], []], [[]]]")

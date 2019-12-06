@@ -19,6 +19,9 @@ import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenAssetTy
 import berlin.tablecodes.services.ServiceStatus;
 import berlin.tablecodes.conditions.ConditionRating;
 import berlin.assets.AssetFinDet;
+import berlin.tablecodes.owners.Role;
+import berlin.tablecodes.owners.BusinessUnit;
+import berlin.tablecodes.owners.Organisation;
 
 /**
  * A class to register domain entities.
@@ -36,8 +39,8 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 	}
 
 	/**
-										     * This is a static initialisation block where all entity types should be registered.
-										     */
+													     * This is a static initialisation block where all entity types should be registered.
+													     */
 	static {
 		entityTypes.addAll(PlatformDomainTypes.types);
 		add(Person.class);
@@ -50,6 +53,9 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(ServiceStatus.class);
 		add(ConditionRating.class);
 		add(AssetFinDet.class);
+		add(Role.class);
+		add(BusinessUnit.class);
+		add(Organisation.class);
 	}
 
 	@Override
