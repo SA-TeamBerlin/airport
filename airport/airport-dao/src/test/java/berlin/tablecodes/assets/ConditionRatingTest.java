@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import berlin.tablecodes.conditions.ConditionRating;
 import berlin.tablecodes.conditions.IConditionRating;
-import berlin.tablecodes.services.IServiceStatus;
-import berlin.tablecodes.services.ServiceStatus;
 import berlin.test_config.AbstractDaoTestCase;
 import berlin.test_config.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
