@@ -2,6 +2,7 @@ package berlin.tablecodes.projects;
 
 import java.util.Date;
 
+import berlin.projects.validators.ProjectStartAndFinishDatesValidator;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -19,6 +20,8 @@ import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
+import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
+import ua.com.fielden.platform.entity.annotation.mutator.Handler;
 import ua.com.fielden.platform.entity.validation.annotation.GeProperty;
 import ua.com.fielden.platform.entity.validation.annotation.LeProperty;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -71,6 +74,7 @@ public class Project extends AbstractPersistentEntity<DynamicEntityKey> {
     @Required
     @Dependent("finishDate")
     @MapTo
+    @BeforeChange(@Handler(ProjectStartAndFinishDatesValidator.class))
     @Title(value = "Start date", desc = "Start date of this project")
     private Date startDate;
 
@@ -89,6 +93,7 @@ public class Project extends AbstractPersistentEntity<DynamicEntityKey> {
     @DateOnly
     @Dependent("startDate")
     @MapTo
+    @BeforeChange(@Handler(ProjectStartAndFinishDatesValidator.class))
     @Title(value = "Finish date", desc = "Finish date of this project")
     private Date finishDate;
 

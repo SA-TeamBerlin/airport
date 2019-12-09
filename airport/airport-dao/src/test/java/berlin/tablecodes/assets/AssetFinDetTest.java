@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static berlin.assets.validators.AssetFinDetAcquireDateWithinProjectPeriod.ERR_OUTSIDE_PROJECT_PERIOD;
+import static berlin.assets.validators.AssetFinDetAcquireDateWithinProjectPeriodValidator.ERR_OUTSIDE_PROJECT_PERIOD;
 
 import org.junit.Test;
 

@@ -15,7 +15,7 @@ import static ua.com.fielden.platform.error.Result.failure;
 import static ua.com.fielden.platform.error.Result.successful;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.select;
 
-public class AssetFinDetAcquireDateWithinProjectPeriod extends AbstractBeforeChangeEventHandler<Date> {
+public class AssetFinDetAcquireDateWithinProjectPeriodValidator extends AbstractBeforeChangeEventHandler<Date> {
     public static final String ERR_OUTSIDE_PROJECT_PERIOD = "Value for acquire date is outside the project period.";
 
     @Override
