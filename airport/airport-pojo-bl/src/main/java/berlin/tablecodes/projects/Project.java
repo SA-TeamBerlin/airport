@@ -3,20 +3,24 @@ package berlin.tablecodes.projects;
 import java.util.Date;
 
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
-import ua.com.fielden.platform.entity.annotation.KeyType;
-import ua.com.fielden.platform.entity.annotation.KeyTitle;
+import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.DateOnly;
+import ua.com.fielden.platform.entity.annotation.Dependent;
+import ua.com.fielden.platform.entity.annotation.DescRequired;
+import ua.com.fielden.platform.entity.annotation.DescTitle;
+import ua.com.fielden.platform.entity.annotation.DisplayDescription;
+import ua.com.fielden.platform.entity.annotation.IsProperty;
+import ua.com.fielden.platform.entity.annotation.KeyTitle;
+import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
-import ua.com.fielden.platform.entity.annotation.DescTitle;
-import ua.com.fielden.platform.entity.annotation.DisplayDescription;
-import ua.com.fielden.platform.entity.annotation.IsProperty;
-import ua.com.fielden.platform.entity.annotation.DescRequired;
+import ua.com.fielden.platform.entity.validation.annotation.GeProperty;
+import ua.com.fielden.platform.entity.validation.annotation.LeProperty;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -26,14 +30,14 @@ import ua.com.fielden.platform.utils.Pair;
  * @author Developers
  *
  */
-@KeyType(String.class)
-@KeyTitle("Key")
+@KeyType(DynamicEntityKey.class)
+@KeyTitle("Project")
 @CompanionObject(IProject.class)
 @MapEntityTo
 @DescTitle("Description")
 @DisplayDescription
 @DescRequired
-public class Project extends AbstractPersistentEntity<String> {
+public class Project extends AbstractPersistentEntity<DynamicEntityKey> {
 
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(Project.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
@@ -41,7 +45,7 @@ public class Project extends AbstractPersistentEntity<String> {
     
     @IsProperty
     @MapTo
-    @Title(value = "Project", desc = "Project for capex")
+    @Title(value = "Name", desc = "Name for project")
     @CompositeKeyMember(1)
     private String name;
 
@@ -65,11 +69,13 @@ public class Project extends AbstractPersistentEntity<String> {
     @IsProperty
     @DateOnly
     @Required
+    @Dependent("finishDate")
     @MapTo
     @Title(value = "Start date", desc = "Start date of this project")
     private Date startDate;
 
     @Observable
+    @LeProperty("finishDate")
     public Project setStartDate(final Date startDate) {
         this.startDate = startDate;
         return this;
@@ -81,11 +87,13 @@ public class Project extends AbstractPersistentEntity<String> {
 
     @IsProperty
     @DateOnly
+    @Dependent("startDate")
     @MapTo
     @Title(value = "Finish date", desc = "Finish date of this project")
     private Date finishDate;
 
     @Observable
+    @GeProperty("startDate")
     public Project setFinishDate(final Date finishDate) {
         this.finishDate = finishDate;
         return this;

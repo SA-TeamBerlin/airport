@@ -8,12 +8,14 @@ import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
 import berlin.tablecodes.conditions.ConditionRating;
+import berlin.tablecodes.projects.Project;
 import berlin.tablecodes.services.ServiceStatus;
 import berlin.webapp.config.assets.AssetFinDetWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
 import berlin.webapp.config.tablecodes.conditions.ConditionRatingWebUiConfig;
+import berlin.webapp.config.tablecodes.projects.ProjectWebUiConfig;
 import berlin.webapp.config.tablecodes.services.ServiceStatusWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -91,6 +93,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final ConditionRatingWebUiConfig conditionRatingWebUiConfig = ConditionRatingWebUiConfig.register(injector(), builder);
         // Financial details
         final AssetFinDetWebUiConfig assetFinDetWebUiConfig = AssetFinDetWebUiConfig.register(injector(), builder);
+        // Project related UI
+        final ProjectWebUiConfig projectWebUiConfig = ProjectWebUiConfig.register(injector(), builder);
 
         // Configure application web resources such as masters and centres
         configApp()
@@ -114,6 +118,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
                 .centre(assetWebUiConfig.centre).done()
                 .addMenuItem(AssetFinDet.ENTITY_TITLE).description(String.format("%s Centre", AssetFinDet.ENTITY_TITLE))
                 .centre(assetFinDetWebUiConfig.centre).done()
+                .addMenuItem(Project.ENTITY_TITLE).description(String.format("%s Centre", Project.ENTITY_TITLE)).centre(projectWebUiConfig.centre).done()
                 .done().done().
             addModule("Users / Personnel").
                 description("Provides functionality for managing application security and personnel data.").
