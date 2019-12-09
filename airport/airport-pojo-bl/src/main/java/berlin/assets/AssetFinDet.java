@@ -3,6 +3,7 @@ package berlin.assets;
 
 import java.util.Date;
 
+import berlin.assets.definers.AssetFinDetProjectDefiner;
 import berlin.assets.validators.AssetFinDetAcquireDateWithinProjectPeriodValidator;
 import berlin.tablecodes.projects.Project;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
@@ -17,6 +18,7 @@ import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.SkipEntityExistsValidation;
 import ua.com.fielden.platform.entity.annotation.Title;
+import ua.com.fielden.platform.entity.annotation.mutator.AfterChange;
 import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
 import ua.com.fielden.platform.entity.annotation.mutator.Handler;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -60,6 +62,7 @@ public class AssetFinDet extends AbstractPersistentEntity<Asset> {
     @MapTo
     @Dependent("acquireDate")
     @Title(value = "Project", desc = "Capex project for acquisition of this asset")
+    @AfterChange(AssetFinDetProjectDefiner.class)
     private Project project;
 
     @Observable
