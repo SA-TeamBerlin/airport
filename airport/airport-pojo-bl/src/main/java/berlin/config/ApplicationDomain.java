@@ -22,6 +22,7 @@ import berlin.assets.AssetFinDet;
 import berlin.tablecodes.owners.Role;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
+import berlin.tablecodes.projects.Project;
 
 /**
  * A class to register domain entities.
@@ -39,8 +40,8 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 	}
 
 	/**
-													     * This is a static initialisation block where all entity types should be registered.
-													     */
+											     * This is a static initialisation block where all entity types should be registered.
+											     */
 	static {
 		entityTypes.addAll(PlatformDomainTypes.types);
 		add(Person.class);
@@ -56,6 +57,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(Role.class);
 		add(BusinessUnit.class);
 		add(Organisation.class);
+		add(Project.class);
 	}
 
 	@Override

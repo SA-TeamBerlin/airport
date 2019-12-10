@@ -43,7 +43,21 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Title(value = "Number", desc = "A unique asset number, auto-generated.")
     @CompositeKeyMember(1)
     @Readonly
-    private String number;    
+    private String number;
+    
+    @IsProperty
+    @Title(value = "Fin Det", desc = "Financial details for this asset")
+    private AssetFinDet finDet;
+
+    @Observable
+    protected Asset setFinDet(final AssetFinDet finDet) {
+        this.finDet = finDet;
+        return this;
+    }
+
+    public AssetFinDet getFinDet() {
+        return finDet;
+    }
     
     @IsProperty
     @MapTo
