@@ -1,7 +1,8 @@
 package berlin.webapp.config.assets;
 
-import static java.lang.String.format;
 import static berlin.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
+import static java.lang.String.format;
+import static ua.com.fielden.platform.web.PrefDim.mkDim;
 
 import java.util.Optional;
 
@@ -10,21 +11,20 @@ import com.google.inject.Injector;
 import berlin.assets.Asset;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
-
-import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import berlin.main.menu.assets.MiAsset;
+import berlin.tablecodes.owners.Role;
+import ua.com.fielden.platform.web.PrefDim.Unit;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
+import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
+import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
 import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
 import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
+import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import ua.com.fielden.platform.web.view.master.EntityMaster;
+import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
 import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
-import ua.com.fielden.platform.web.view.master.api.IMaster;
-import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
-import berlin.main.menu.assets.MiAsset;
-import ua.com.fielden.platform.web.centre.EntityCentre;
-import ua.com.fielden.platform.web.view.master.EntityMaster;
-import static ua.com.fielden.platform.web.PrefDim.mkDim;
-import ua.com.fielden.platform.web.PrefDim.Unit;
 /**
  * {@link Asset} Web UI configuration.
  *
@@ -54,7 +54,7 @@ public class AssetWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Asset> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(2, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 3);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Asset.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Asset.class);
@@ -72,6 +72,7 @@ public class AssetWebUiConfig {
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(Asset.class).also()
                 .addCrit("desc").asMulti().text().also()
+                .addCrit("role").asMulti().autocompleter(Role.class).also()
                 .addCrit("finDet.initCost").asRange().decimal().also()
                 .addCrit("finDet.acquireDate").asRange().date()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
@@ -82,6 +83,7 @@ public class AssetWebUiConfig {
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Asset.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
                     .addProp("desc").minWidth(200).also()
+                    .addProp("role").minWidth(100).also()
                     .addProp("finDet.initCost").width(150).also()
                     .addProp("finDet.acquireDate").width(150)
                 .addPrimaryAction(standardEditAction)
@@ -97,11 +99,12 @@ public class AssetWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Asset> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(3, 1);
 
         final IMaster<Asset> masterConfig = new SimpleMasterBuilder<Asset>().forEntity(Asset.class)
                 .addProp("number").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
+                .addProp("role").asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

@@ -1,6 +1,9 @@
 package berlin.assets;
 
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.owners.BusinessUnit;
+import berlin.tablecodes.owners.Organisation;
+import berlin.tablecodes.owners.Role;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -59,6 +62,51 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return finDet;
     }
     
+    @IsProperty
+    @MapTo
+    @Title(value = "Role", desc = "Role of the owner for this asset")
+    private Role role;
+
+    @Observable
+    public Asset setRole(final Role role) {
+        this.role = role;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    @IsProperty
+    @MapTo
+    @Title(value = "Business Unit", desc = "Business unit for this asset")
+    private BusinessUnit businessUnit;
+
+    @Observable
+    public Asset setBusinessUnit(final BusinessUnit businessUnit) {
+        this.businessUnit = businessUnit;
+        return this;
+    }
+
+    public BusinessUnit getBusinessUnit() {
+        return businessUnit;
+    }
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Organisation", desc = "Organisation that owns this asset")
+    private Organisation organisation;
+
+    @Observable
+    public Asset setOrganisation(final Organisation organisation) {
+        this.organisation = organisation;
+        return this;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
     @IsProperty
     @MapTo
     private AssetType assetType;

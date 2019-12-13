@@ -14,6 +14,7 @@ import berlin.main.menu.tablecodes.assets.MiAssetType;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
 import berlin.tablecodes.assets.producers.AssetTypeProducer;
+import berlin.tablecodes.owners.Role;
 import ua.com.fielden.platform.web.PrefDim.Unit;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -73,6 +74,7 @@ public class AssetTypeWebUiConfig {
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(AssetType.class).also()
                 .addCrit("desc").asMulti().text().also()
+                .addCrit("role").asMulti().autocompleter(Role.class).also()
                 .addCrit("active").asMulti().bool().also()
                 .addCrit("assetClass").asMulti().autocompleter(AssetClass.class)
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
@@ -83,6 +85,7 @@ public class AssetTypeWebUiConfig {
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", AssetType.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
                 .addProp("desc").minWidth(100).also()
+                .addProp("role").minWidth(100).also()
                 .addProp("active").minWidth(100).also()
                 .addProp("assetClass").width(150).withActionSupplier(builder.getOpenMasterAction(AssetClass.class))
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
@@ -104,6 +107,7 @@ public class AssetTypeWebUiConfig {
         final IMaster<AssetType> masterConfig = new SimpleMasterBuilder<AssetType>().forEntity(AssetType.class)
                 .addProp("name").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
+                .addProp("role").asAutocompleter().also()
                 .addProp("active").asCheckbox().also()
                 .addProp("assetClass").asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
