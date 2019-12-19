@@ -7,6 +7,7 @@ import berlin.assets.AssetFinDet;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.assets.AssetTypeOwnership;
 import berlin.tablecodes.conditions.ConditionRating;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
@@ -16,6 +17,7 @@ import berlin.tablecodes.services.ServiceStatus;
 import berlin.webapp.config.assets.AssetFinDetWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
+import berlin.webapp.config.tablecodes.assets.AssetTypeOwnershipWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
 import berlin.webapp.config.tablecodes.conditions.ConditionRatingWebUiConfig;
 import berlin.webapp.config.tablecodes.owners.BusinessUnitWebUiConfig;
@@ -91,6 +93,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         // Asset table codes
         final AssetClassWebUiConfig assetClassWebUiConfig = AssetClassWebUiConfig.register(injector(), builder);
         final AssetTypeWebUiConfig assetTypeWebUiConfig = AssetTypeWebUiConfig.register(injector(), builder);
+        final AssetTypeOwnershipWebUiConfig assetTypeOwnershipWebUiConfig = AssetTypeOwnershipWebUiConfig.register(injector(), builder);
         // Asset
         final AssetWebUiConfig assetWebUiConfig = AssetWebUiConfig.register(injector(), builder);
         // Service Status
@@ -155,6 +158,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .centre(assetClassWebUiConfig.centre).done()
                     .addMenuItem(AssetType.ENTITY_TITLE).description(String.format("%s Centre", AssetType.ENTITY_TITLE))
                     .centre(assetTypeWebUiConfig.centre).done()
+                    .addMenuItem(AssetTypeOwnership.ENTITY_TITLE).description(String.format("%s Centre", AssetTypeOwnership.ENTITY_TITLE))
+                    .centre(assetTypeOwnershipWebUiConfig.centre).done()
                     .addMenuItem(ServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", ServiceStatus.ENTITY_TITLE))
                     .centre(serviceStatusWebUiConfig.centre).done()
                     .addMenuItem(ConditionRating.ENTITY_TITLE).description(String.format("%s Centre", ConditionRating.ENTITY_TITLE))
