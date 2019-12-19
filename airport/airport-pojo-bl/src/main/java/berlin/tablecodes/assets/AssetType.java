@@ -1,9 +1,6 @@
 package berlin.tablecodes.assets;
 
 import berlin.tablecodes.conditions.ConditionRating;
-import berlin.tablecodes.owners.BusinessUnit;
-import berlin.tablecodes.owners.Organisation;
-import berlin.tablecodes.owners.Role;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -17,6 +14,7 @@ import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
+import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
@@ -62,54 +60,10 @@ public class AssetType extends ActivatableAbstractEntity<DynamicEntityKey> {
     public ConditionRating getConditionRating() {
         return conditionRating;
     }
-
-    @IsProperty
-    @MapTo
-    @Title(value = "Role", desc = "Role of the owner for this asset type")
-    private Role role;
-
-    @Observable
-    public AssetType setRole(final Role role) {
-        this.role = role;
-        return this;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    @IsProperty
-    @MapTo
-    @Title(value = "Business Unit", desc = "Business unit for this asset type")
-    private BusinessUnit businessUnit;
-
-    @Observable
-    public AssetType setBusinessUnit(final BusinessUnit businessUnit) {
-        this.businessUnit = businessUnit;
-        return this;
-    }
-
-    public BusinessUnit getBusinessUnit() {
-        return businessUnit;
-    }
     
     @IsProperty
     @MapTo
-    @Title(value = "Organisation", desc = "Organisation that owns this asset type")
-    private Organisation organisation;
-
-    @Observable
-    public AssetType setOrganisation(final Organisation organisation) {
-        this.organisation = organisation;
-        return this;
-    }
-
-    public Organisation getOrganisation() {
-        return organisation;
-    }
-    
-    @IsProperty
-    @MapTo
+    @Required
     @Title(value = "Asset Class", desc = "The class of this asset type")
     private AssetClass assetClass;
 
@@ -138,6 +92,13 @@ public class AssetType extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getName() {
         return name;
+    }
+    
+    @Override
+    @Observable
+    public AssetType setActive(boolean active) {
+        super.setActive(active);
+        return this;
     }
 
 }
