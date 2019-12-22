@@ -10,9 +10,9 @@ import com.google.inject.Injector;
 
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
-import berlin.main.menu.tablecodes.assets.MiAssetTypeOwnership;
+import berlin.main.menu.tablecodes.assets.MiAssetTypeMaintenance;
 import berlin.tablecodes.assets.AssetType;
-import berlin.tablecodes.assets.AssetTypeOwnership;
+import berlin.tablecodes.assets.AssetTypeMaintenance;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
 import berlin.tablecodes.owners.Role;
