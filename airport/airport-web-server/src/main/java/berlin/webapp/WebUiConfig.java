@@ -4,12 +4,10 @@ import org.apache.commons.lang.StringUtils;
 
 import berlin.assets.Asset;
 import berlin.assets.AssetFinDet;
-import berlin.assets.AssetMaintenance;
 import berlin.assets.AssetOwnership;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
-import berlin.tablecodes.assets.AssetTypeMaintenance;
 import berlin.tablecodes.assets.AssetTypeOwnership;
 import berlin.tablecodes.conditions.ConditionRating;
 import berlin.tablecodes.owners.BusinessUnit;
@@ -18,11 +16,9 @@ import berlin.tablecodes.owners.Role;
 import berlin.tablecodes.projects.Project;
 import berlin.tablecodes.services.ServiceStatus;
 import berlin.webapp.config.assets.AssetFinDetWebUiConfig;
-import berlin.webapp.config.assets.AssetMaintenanceWebUiConfig;
 import berlin.webapp.config.assets.AssetOwnershipWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
-import berlin.webapp.config.tablecodes.assets.AssetTypeMaintenanceWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeOwnershipWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
 import berlin.webapp.config.tablecodes.conditions.ConditionRatingWebUiConfig;
@@ -102,6 +98,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final AssetTypeOwnershipWebUiConfig assetTypeOwnershipWebUiConfig = AssetTypeOwnershipWebUiConfig.register(injector(), builder);
         final AssetOwnershipWebUiConfig assetOwnershipWebUiConfig = AssetOwnershipWebUiConfig.register(injector(), builder);
         
+        final AssetTypeOverseeingWebUiConfig assetTypeOverseeingWebUiConfig = AssetTypeOverseeingWebUiConfig.register(injector(), builder);
+        final AssetOverseeingWebUiConfig assetOverseeingWebUiConfig = AssetOverseeingWebUiConfig.register(injector(), builder);
+        
         final AssetTypeMaintenanceWebUiConfig assetTypeMaintenanceWebUiConfig = AssetTypeMaintenanceWebUiConfig.register(injector(), builder);
         final AssetMaintenanceWebUiConfig assetMaintenanceWebUiConfig = AssetMaintenanceWebUiConfig.register(injector(), builder);
         
@@ -173,6 +172,11 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .centre(assetTypeOwnershipWebUiConfig.centre).done()
                     .addMenuItem(AssetOwnership.ENTITY_TITLE).description(String.format("%s Centre", AssetOwnership.ENTITY_TITLE))
                     .centre(assetOwnershipWebUiConfig.centre).done()
+                    
+                    .addMenuItem(AssetTypeOverseeing.ENTITY_TITLE).description(String.format("%s Centre", AssetTypeOverseeing.ENTITY_TITLE))
+                    .centre(assetTypeOverseeingWebUiConfig.centre).done()
+                    .addMenuItem(AssetOverseeing.ENTITY_TITLE).description(String.format("%s Centre", AssetOverseeing.ENTITY_TITLE))
+                    .centre(assetOverseeingWebUiConfig.centre).done()
                     
                     .addMenuItem(AssetTypeMaintenance.ENTITY_TITLE).description(String.format("%s Centre", AssetTypeMaintenance.ENTITY_TITLE))
                     .centre(assetTypeMaintenanceWebUiConfig.centre).done()

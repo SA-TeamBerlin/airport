@@ -26,7 +26,7 @@ public class AssetTypeMaintenanceDao extends CommonEntityDao<AssetTypeMaintenanc
             maintenance.getProperty("role").setRequired(true);
             maintenance.getProperty("businessUnit").setRequired(true);
             maintenance.getProperty("organisation").setRequired(true);
-            return maintenance;
+            return ownership;
         }
 
     @Override

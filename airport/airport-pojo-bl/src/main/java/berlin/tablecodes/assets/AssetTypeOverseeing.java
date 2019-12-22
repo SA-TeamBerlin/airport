@@ -30,11 +30,11 @@ import ua.com.fielden.platform.utils.Pair;
  */
 @KeyType(DynamicEntityKey.class)
 @KeyTitle("Key")
-@CompanionObject(IAssetTypeMaintenance.class)
+@CompanionObject(IAssetTypeOverseeing.class)
 @MapEntityTo
-public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntityKey> {
+public class AssetTypeOverseeing extends AbstractPersistentEntity<DynamicEntityKey> {
 
-    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(AssetTypeMaintenance.class);
+    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(AssetTypeOverseeing.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
@@ -45,7 +45,7 @@ public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntity
     private AssetType assetType;
 
     @Observable
-    public AssetTypeMaintenance setAssetType(final AssetType assetType) {
+    public AssetTypeOverseeing setAssetType(final AssetType assetType) {
         this.assetType = assetType;
         return this;
     }
@@ -56,12 +56,12 @@ public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntity
     
     @IsProperty
     @MapTo
-    @Title(value = "Role", desc = "Role of the owner for this asset type")
-    @AfterChange(AssetTypeMaintenanceExclusivityDefiner.class)
+    @Title(value = "Role", desc = "Role of the comtroler for this asset type")
+    @AfterChange(AssetTypeOverseeingExclusivityDefiner.class)
     private Role role;
 
     @Observable
-    public AssetTypeMaintenance setRole(final Role role) {
+    public AssetTypeOverseeing setRole(final Role role) {
         this.role = role;
         return this;
     }
@@ -73,11 +73,11 @@ public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntity
     @IsProperty
     @MapTo
     @Title(value = "Business Unit", desc = "Business unit for this asset type")
-    @AfterChange(AssetTypeMaintenanceExclusivityDefiner.class)
+    @AfterChange(AssetTypeOverseeingExclusivityDefiner.class)
     private BusinessUnit businessUnit;
 
     @Observable
-    public AssetTypeMaintenance setBusinessUnit(final BusinessUnit businessUnit) {
+    public AssetTypeOverseeing setBusinessUnit(final BusinessUnit businessUnit) {
         this.businessUnit = businessUnit;
         return this;
     }
@@ -89,11 +89,11 @@ public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntity
     @IsProperty
     @MapTo
     @Title(value = "Organisation", desc = "Organisation that owns this asset type")
-    @AfterChange(AssetTypeMaintenanceExclusivityDefiner.class)
+    @AfterChange(AssetTypeOverseeingExclusivityDefiner.class)
     private Organisation organisation;
 
     @Observable
-    public AssetTypeMaintenance setOrganisation(final Organisation organisation) {
+    public AssetTypeOverseeing setOrganisation(final Organisation organisation) {
         this.organisation = organisation;
         return this;
     }
@@ -110,7 +110,7 @@ public class AssetTypeMaintenance extends AbstractPersistentEntity<DynamicEntity
     private Date startDate;
 
     @Observable
-    public AssetTypeMaintenance setStartDate(final Date startDate) {
+    public AssetTypeOverseeing setStartDate(final Date startDate) {
         this.startDate = startDate;
         return this;
     }

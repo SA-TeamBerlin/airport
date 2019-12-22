@@ -1,6 +1,7 @@
 package berlin.assets.definers;
 
-import berlin.assets.AssetMaintenance;
+import berlin.assets.AssetOverseeing;
+
 import ua.com.fielden.platform.entity.meta.IAfterChangeEventHandler;
 import ua.com.fielden.platform.entity.meta.MetaProperty;
 

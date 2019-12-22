@@ -4,12 +4,12 @@ import ua.com.fielden.platform.entity.annotation.EntityType;
 import ua.com.fielden.platform.ui.menu.MiWithConfigurationSupport;
 import berlin.assets.AssetOwnership;
 /**
- * Main menu item representing an entity centre for {@link AssetMaintenance}.
+ * Main menu item representing an entity centre for {@link AssetOverseeing}.
  *
  * @author Developers
  *
  */
-@EntityType(AssetMaintenance.class)
-public class MiAssetMaintenance extends MiWithConfigurationSupport<AssetMaintenance> {
+@EntityType(AssetOverseeing.class)
+public class MiAssetOverseeing extends MiWithConfigurationSupport<AssetOverseeing> {
 
 }
