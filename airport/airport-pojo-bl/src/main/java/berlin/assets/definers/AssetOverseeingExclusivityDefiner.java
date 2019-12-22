@@ -33,7 +33,7 @@ public class AssetOverseeingExclusivityDefiner implements IAfterChangeEventHandl
             	overseeing.setRole(null);
             	overseeing.getProperty("organisation").setRequired(false);
             	overseeing.setOrganisation(null);
-                ooverseeing.getProperty("businessUnit").setRequired(true);
+                overseeing.getProperty("businessUnit").setRequired(true);
             } else if ("organisation".equals(prop.getName())) {
             	overseeing.getProperty("role").setRequired(false);
             	overseeing.setRole(null);

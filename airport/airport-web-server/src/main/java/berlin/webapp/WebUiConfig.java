@@ -101,6 +101,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final AssetTypeOverseeingWebUiConfig assetTypeOverseeingWebUiConfig = AssetTypeOverseeingWebUiConfig.register(injector(), builder);
         final AssetOverseeingWebUiConfig assetOverseeingWebUiConfig = AssetOverseeingWebUiConfig.register(injector(), builder);
         
+        final AssetTypeMaintenanceWebUiConfig assetTypeMaintenanceWebUiConfig = AssetTypeMaintenanceWebUiConfig.register(injector(), builder);
+        final AssetMaintenanceWebUiConfig assetMaintenanceWebUiConfig = AssetMaintenanceWebUiConfig.register(injector(), builder);
+        
         // Asset
         final AssetWebUiConfig assetWebUiConfig = AssetWebUiConfig.register(injector(), builder);
         // Service Status
@@ -174,6 +177,11 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .centre(assetTypeOverseeingWebUiConfig.centre).done()
                     .addMenuItem(AssetOverseeing.ENTITY_TITLE).description(String.format("%s Centre", AssetOverseeing.ENTITY_TITLE))
                     .centre(assetOverseeingWebUiConfig.centre).done()
+                    
+                    .addMenuItem(AssetTypeMaintenance.ENTITY_TITLE).description(String.format("%s Centre", AssetTypeMaintenance.ENTITY_TITLE))
+                    .centre(assetTypeMaintenanceWebUiConfig.centre).done()
+                    .addMenuItem(AssetMaintenance.ENTITY_TITLE).description(String.format("%s Centre", AssetMaintenance.ENTITY_TITLE))
+                    .centre(assetMaintenanceWebUiConfig.centre).done()
                     
                     .addMenuItem(ServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", ServiceStatus.ENTITY_TITLE))
                     .centre(serviceStatusWebUiConfig.centre).done()
