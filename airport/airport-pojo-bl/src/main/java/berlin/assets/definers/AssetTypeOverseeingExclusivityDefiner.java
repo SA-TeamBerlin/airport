@@ -1,7 +1,6 @@
 package berlin.assets.definers;
 
 import berlin.tablecodes.assets.AssetTypeOverseeing;
-
 import ua.com.fielden.platform.entity.meta.IAfterChangeEventHandler;
 import ua.com.fielden.platform.entity.meta.MetaProperty;
 
@@ -12,7 +11,7 @@ public class AssetTypeOverseeingExclusivityDefiner implements IAfterChangeEventH
         final AssetTypeOverseeing overseeing = prop.getEntity();
         final boolean allEmpty = overseeing.getRole() == null && overseeing.getBusinessUnit() == null && overseeing.getOrganisation() == null;
         
-        if (ooverseeing.getRole() == null) {
+        if (overseeing.getRole() == null) {
         	overseeing.getProperty("role").setRequired(allEmpty);
         }
         if (overseeing.getBusinessUnit() == null) {

@@ -2,7 +2,7 @@ package berlin.tablecodes.assets;
 
 import java.util.Date;
 
-import berlin.assets.definers.AssetTypeOwnershipExclusivityDefiner;
+import berlin.assets.definers.AssetTypeMaintenanceExclusivityDefiner;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
 import berlin.tablecodes.owners.Role;

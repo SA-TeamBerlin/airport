@@ -6,25 +6,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import berlin.assets.Asset;
+import berlin.assets.AssetFinDet;
+import berlin.assets.AssetMaintenance;
+import berlin.assets.AssetOverseeing;
+import berlin.assets.AssetOwnership;
 import berlin.personnel.Person;
+import berlin.tablecodes.assets.AssetClass;
+import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.assets.AssetTypeMaintenance;
+import berlin.tablecodes.assets.AssetTypeOverseeing;
+import berlin.tablecodes.assets.AssetTypeOwnership;
+import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenAssetType_MenuItem;
+import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenMain_MenuItem;
+import berlin.tablecodes.assets.ui_actions.OpenAssetClassMasterAction;
+import berlin.tablecodes.conditions.ConditionRating;
+import berlin.tablecodes.owners.BusinessUnit;
+import berlin.tablecodes.owners.Organisation;
+import berlin.tablecodes.owners.Role;
+import berlin.tablecodes.projects.Project;
+import berlin.tablecodes.services.ServiceStatus;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
-import berlin.tablecodes.assets.AssetClass;
-import berlin.tablecodes.assets.AssetType;
-import berlin.assets.Asset;
-import berlin.tablecodes.assets.ui_actions.OpenAssetClassMasterAction;
-import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenMain_MenuItem;
-import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenAssetType_MenuItem;
-import berlin.tablecodes.services.ServiceStatus;
-import berlin.tablecodes.conditions.ConditionRating;
-import berlin.assets.AssetFinDet;
-import berlin.tablecodes.owners.Role;
-import berlin.tablecodes.owners.BusinessUnit;
-import berlin.tablecodes.owners.Organisation;
-import berlin.tablecodes.projects.Project;
-import berlin.tablecodes.assets.AssetTypeOwnership;
-import berlin.assets.AssetOwnership;
 
 /**
  * A class to register domain entities.
@@ -62,6 +66,10 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(Project.class);
 		add(AssetTypeOwnership.class);
 		add(AssetOwnership.class);
+		add(AssetOverseeing.class);
+		add(AssetTypeOverseeing.class);
+		add(AssetMaintenance.class);
+		add(AssetTypeMaintenance.class);
 	}
 
 	@Override
