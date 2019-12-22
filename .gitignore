@@ -24,6 +24,7 @@ target
 .classpath
 .project
 .idea
+.DS_Store
 .settings
 *.class
 *.dtd
