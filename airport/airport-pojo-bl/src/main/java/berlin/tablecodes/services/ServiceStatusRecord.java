@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ua.com.fielden.platform.entity.AbstractPersistentEntity;
+import ua.com.fielden.platform.entity.DynamicEntityKey;
+
 /**
  * Class which provide record according to the service status
  *
@@ -16,18 +19,20 @@ import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
+import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.entity.validation.annotation.Final;
 
+@KeyType(DynamicEntityKey.class)
 @KeyTitle("Service Status Record")
 @MapEntityTo
 @DescTitle("The Class which make a record about service status")
 @DisplayDescription
 @DescRequired
-public class ServiceStatusRecord {
+public class ServiceStatusRecord extends AbstractPersistentEntity<DynamicEntityKey> {
 
 	private static final Date datetimeOfRecord = new Date();
 	private static ArrayList<Date> ArrayWithChanges = new ArrayList<>(100);
