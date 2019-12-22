@@ -1,14 +1,13 @@
 package berlin.assets.definers;
 
-import berlin.tablecodes.assets.AssetTypeOwnership;
+import berlin.assets.AssetOwnership;
 import ua.com.fielden.platform.entity.meta.IAfterChangeEventHandler;
 import ua.com.fielden.platform.entity.meta.MetaProperty;
 
-public class AssetTypeOwnershipExclusivityDefiner implements IAfterChangeEventHandler<Object> {
-
+public class AssetOwnershipExclusivityDefiner implements IAfterChangeEventHandler<Object> {
     @Override
     public void handle(final MetaProperty<Object> prop, final Object value) {
-        final AssetTypeOwnership ownership = prop.getEntity();
+        final AssetOwnership ownership = prop.getEntity();
         final boolean allEmpty = ownership.getRole() == null && ownership.getBusinessUnit() == null && ownership.getOrganisation() == null;
         
         if (ownership.getRole() == null) {

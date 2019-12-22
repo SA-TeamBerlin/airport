@@ -92,9 +92,11 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         save(new_(AssetClass.class).setActive(true).setName("AC2").setDesc("First description."));
         save(new_(AssetType.class).setActive(true).setName("AT1").setDesc("First description.").setAssetClass(as1));
         
-        final Asset asset1 = save(new_(Asset.class).setDesc("a demo asset 1"));
-        final Asset asset2 = save(new_(Asset.class).setDesc("a demo asset 2"));
-        final Asset asset3 = save(new_(Asset.class).setDesc("a demo asset 3"));
+        save(new_(Asset.class).setActive(true).setNumber("000005").setDesc("First description."));
+        
+        final Asset asset1 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 1"));
+        final Asset asset2 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 2"));
+        final Asset asset3 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 3"));
         
         final AssetFinDet finDet1 = co$(AssetFinDet.class).findById(asset1.getId(), IAssetFinDet.FETCH_PROVIDER.fetchModel());
         save(finDet1.setInitCost(Money.of("120.00")).setAcquireDate(date("2019-12-07 00:00:00")));

@@ -1,8 +1,8 @@
-package berlin.tablecodes.assets;
+package berlin.assets;
 
 import java.util.Date;
 
-import berlin.assets.definers.AssetTypeOwnershipExclusivityDefiner;
+import berlin.assets.definers.AssetOwnershipExclusivityDefiner;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
 import berlin.tablecodes.owners.Role;
@@ -30,38 +30,38 @@ import ua.com.fielden.platform.utils.Pair;
  */
 @KeyType(DynamicEntityKey.class)
 @KeyTitle("Key")
-@CompanionObject(IAssetTypeOwnership.class)
+@CompanionObject(IAssetOwnership.class)
 @MapEntityTo
-public class AssetTypeOwnership extends AbstractPersistentEntity<DynamicEntityKey> {
+public class AssetOwnership extends AbstractPersistentEntity<DynamicEntityKey> {
 
-    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(AssetTypeOwnership.class);
+    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(AssetOwnership.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
     @IsProperty
     @MapTo
-    @Title(value = "Asset Type", desc = "Asset type")
+    @Title(value = "Asset", desc = "Asset")
     @CompositeKeyMember(1)
-    private AssetType assetType;
+    private Asset asset;
 
     @Observable
-    public AssetTypeOwnership setAssetType(final AssetType assetType) {
-        this.assetType = assetType;
+    public AssetOwnership setAsset(final Asset asset) {
+        this.asset = asset;
         return this;
     }
 
-    public AssetType getAssetType() {
-        return assetType;
+    public Asset getAsset() {
+        return asset;
     }
-    
+
     @IsProperty
     @MapTo
-    @Title(value = "Role", desc = "Role of the owner for this asset type")
-    @AfterChange(AssetTypeOwnershipExclusivityDefiner.class)
+    @Title(value = "Role", desc = "Role for this asset")
+    @AfterChange(AssetOwnershipExclusivityDefiner.class)
     private Role role;
 
     @Observable
-    public AssetTypeOwnership setRole(final Role role) {
+    public AssetOwnership setRole(final Role role) {
         this.role = role;
         return this;
     }
@@ -72,12 +72,12 @@ public class AssetTypeOwnership extends AbstractPersistentEntity<DynamicEntityKe
 
     @IsProperty
     @MapTo
-    @Title(value = "Business Unit", desc = "Business unit for this asset type")
-    @AfterChange(AssetTypeOwnershipExclusivityDefiner.class)
+    @Title(value = "Business Unit", desc = "Business unit for this asset")
+    @AfterChange(AssetOwnershipExclusivityDefiner.class)
     private BusinessUnit businessUnit;
 
     @Observable
-    public AssetTypeOwnership setBusinessUnit(final BusinessUnit businessUnit) {
+    public AssetOwnership setBusinessUnit(final BusinessUnit businessUnit) {
         this.businessUnit = businessUnit;
         return this;
     }
@@ -85,15 +85,15 @@ public class AssetTypeOwnership extends AbstractPersistentEntity<DynamicEntityKe
     public BusinessUnit getBusinessUnit() {
         return businessUnit;
     }
-    
+
     @IsProperty
     @MapTo
-    @Title(value = "Organisation", desc = "Organisation that owns this asset type")
-    @AfterChange(AssetTypeOwnershipExclusivityDefiner.class)
+    @Title(value = "Organisation", desc = "Organisation for this asset")
+    @AfterChange(AssetOwnershipExclusivityDefiner.class)
     private Organisation organisation;
 
     @Observable
-    public AssetTypeOwnership setOrganisation(final Organisation organisation) {
+    public AssetOwnership setOrganisation(final Organisation organisation) {
         this.organisation = organisation;
         return this;
     }
@@ -110,7 +110,7 @@ public class AssetTypeOwnership extends AbstractPersistentEntity<DynamicEntityKe
     private Date startDate;
 
     @Observable
-    public AssetTypeOwnership setStartDate(final Date startDate) {
+    public AssetOwnership setStartDate(final Date startDate) {
         this.startDate = startDate;
         return this;
     }
