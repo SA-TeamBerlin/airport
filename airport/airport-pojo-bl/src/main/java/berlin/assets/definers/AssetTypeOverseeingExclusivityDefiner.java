@@ -12,7 +12,7 @@ public class AssetTypeOverseeingExclusivityDefiner implements IAfterChangeEventH
         final AssetTypeOverseeing overseeing = prop.getEntity();
         final boolean allEmpty = overseeing.getRole() == null && overseeing.getBusinessUnit() == null && overseeing.getOrganisation() == null;
         
-        if (ooverseeing.getRole() == null) {
+        if (overseeing.getRole() == null) {
         	overseeing.getProperty("role").setRequired(allEmpty);
         }
         if (overseeing.getBusinessUnit() == null) {

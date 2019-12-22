@@ -9,10 +9,11 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import berlin.assets.Asset;
+import berlin.assets.AssetOverseeing;
 import berlin.assets.AssetOwnership;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
-import berlin.main.menu.assets.MiAssetOwnership;
+import berlin.main.menu.assets.MiAssetOverseeing;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
 import berlin.tablecodes.owners.Role;
