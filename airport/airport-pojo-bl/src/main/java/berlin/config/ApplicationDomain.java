@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 
 import berlin.assets.Asset;
 import berlin.assets.AssetFinDet;
+import berlin.assets.AssetMaintenance;
 import berlin.assets.AssetOverseeing;
 import berlin.assets.AssetOwnership;
 import berlin.personnel.Person;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.assets.AssetTypeMaintenance;
 import berlin.tablecodes.assets.AssetTypeOverseeing;
 import berlin.tablecodes.assets.AssetTypeOwnership;
 import berlin.tablecodes.assets.master.menu.actions.AssetClassMaster_OpenAssetType_MenuItem;
@@ -66,6 +68,8 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(AssetOwnership.class);
 		add(AssetOverseeing.class);
 		add(AssetTypeOverseeing.class);
+		add(AssetMaintenance.class);
+		add(AssetTypeMaintenance.class);
 	}
 
 	@Override

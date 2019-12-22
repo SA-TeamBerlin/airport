@@ -1,7 +1,6 @@
 package berlin.assets.definers;
 
 import berlin.tablecodes.assets.AssetTypeOverseeing;
-
 import ua.com.fielden.platform.entity.meta.IAfterChangeEventHandler;
 import ua.com.fielden.platform.entity.meta.MetaProperty;
 

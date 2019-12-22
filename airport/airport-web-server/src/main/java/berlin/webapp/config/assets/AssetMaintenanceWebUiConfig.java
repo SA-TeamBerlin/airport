@@ -9,11 +9,10 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import berlin.assets.Asset;
-import berlin.assets.AssetOverseeing;
-import berlin.assets.AssetOwnership;
+import berlin.assets.AssetMaintenance;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
-import berlin.main.menu.assets.MiAssetOverseeing;
+import berlin.main.menu.assets.MiAssetMaintenance;
 import berlin.tablecodes.owners.BusinessUnit;
 import berlin.tablecodes.owners.Organisation;
 import berlin.tablecodes.owners.Role;
@@ -30,21 +29,21 @@ import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
 import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 /**
- * {@link AssetOverseeing} Web UI configuration.
+ * {@link AssetMaintenance} Web UI configuration.
  *
  * @author Developers
  *
  */
-public class AssetOverseeingWebUiConfig {
+public class AssetMaintenanceWebUiConfig {
 
-    public final EntityCentre<AssetOverseeing> centre;
-    public final EntityMaster<AssetOverseeing> master;
+    public final EntityCentre<AssetMaintenance> centre;
+    public final EntityMaster<AssetMaintenance> master;
 
-    public static AssetOverseeingWebUiConfig register(final Injector injector, final IWebUiBuilder builder) {
-        return new AssetOverseeingWebUiConfig(injector, builder);
+    public static AssetMaintenanceWebUiConfig register(final Injector injector, final IWebUiBuilder builder) {
+        return new AssetMaintenanceWebUiConfig(injector, builder);
     }
 
-    private AssetOverseeingWebUiConfig(final Injector injector, final IWebUiBuilder builder) {
+    private AssetMaintenanceWebUiConfig(final Injector injector, final IWebUiBuilder builder) {
         centre = createCentre(injector, builder);
         builder.register(centre);
         master = createMaster(injector);
@@ -52,22 +51,22 @@ public class AssetOverseeingWebUiConfig {
     }
 
     /**
-     * Creates entity centre for {@link AssetOverseeing}.
+     * Creates entity centre for {@link AssetMaintenance}.
      *
      * @param injector
      * @return created entity centre
      */
-    private EntityCentre<AssetOverseeing> createCentre(final Injector injector, final IWebUiBuilder builder) {
+    private EntityCentre<AssetMaintenance> createCentre(final Injector injector, final IWebUiBuilder builder) {
         final String layout = LayoutComposer.mkVarGridForCentre(2, 3);
 
-        final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(AssetOverseeing.class);
-        final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(AssetOverseeing.class);
-        final EntityActionConfig standardExportAction = StandardActions.EXPORT_ACTION.mkAction(AssetOverseeing.class);
-        final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(AssetOverseeing.class);
+        final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(AssetMaintenance.class);
+        final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(AssetMaintenance.class);
+        final EntityActionConfig standardExportAction = StandardActions.EXPORT_ACTION.mkAction(AssetMaintenance.class);
+        final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(AssetMaintenance.class);
         final EntityActionConfig standardSortAction = CentreConfigActions.CUSTOMISE_COLUMNS_ACTION.mkAction();
-        builder.registerOpenMasterAction(AssetOverseeing.class, standardEditAction);
+        builder.registerOpenMasterAction(AssetMaintenance.class, standardEditAction);
 
-        final EntityCentreConfig<AssetOverseeing> ecc = EntityCentreBuilder.centreFor(AssetOverseeing.class)
+        final EntityCentreConfig<AssetMaintenance> ecc = EntityCentreBuilder.centreFor(AssetMaintenance.class)
                 //.runAutomatically()
                 .addFrontAction(standardNewAction)
                 .addTopAction(standardNewAction).also()
@@ -84,7 +83,7 @@ public class AssetOverseeingWebUiConfig {
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
                 .addProp("asset").order(1).asc().minWidth(100)
-                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", AssetOverseeing.ENTITY_TITLE))
+                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", AssetMaintenance.ENTITY_TITLE))
                     .withActionSupplier(builder.getOpenMasterAction(Asset.class)).also()
                 .addProp("startDate").order(2).desc().width(150).also()
                 .addProp("role").minWidth(100).also()
@@ -93,19 +92,19 @@ public class AssetOverseeingWebUiConfig {
                 .addPrimaryAction(standardEditAction)
                 .build();
 
-        return new EntityCentre<>(MiAssetOverseeing.class, MiAssetOverseeing.class.getSimpleName(), ecc, injector, null);
+        return new EntityCentre<>(MiAssetMaintenance.class, MiAssetMaintenance.class.getSimpleName(), ecc, injector, null);
     }
 
     /**
-     * Creates entity master for {@link AssetOverseeing}.
+     * Creates entity master for {@link AssetMaintenance}.
      *
      * @param injector
      * @return created entity master
      */
-    private EntityMaster<AssetOverseeing> createMaster(final Injector injector) {
+    private EntityMaster<AssetMaintenance> createMaster(final Injector injector) {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(5, 1);
 
-        final IMaster<AssetOverseeing> masterConfig = new SimpleMasterBuilder<AssetOverseeing>().forEntity(AssetOverseeing.class)
+        final IMaster<AssetMaintenance> masterConfig = new SimpleMasterBuilder<AssetMaintenance>().forEntity(AssetMaintenance.class)
         		 .addProp("asset").asAutocompleter().also()
                  .addProp("startDate").asDatePicker().also()
                  .addProp("role").asAutocompleter().also()
@@ -120,6 +119,6 @@ public class AssetOverseeingWebUiConfig {
                 .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 480, Unit.PX))
                 .done();
 
-        return new EntityMaster<>(AssetOverseeing.class, masterConfig, injector);
+        return new EntityMaster<>(AssetMaintenance.class, masterConfig, injector);
     }
 }
