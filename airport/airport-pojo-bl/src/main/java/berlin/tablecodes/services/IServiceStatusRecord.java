@@ -1,4 +1,4 @@
-package main.java.berlin.tablecodes.services;
+package berlin.tablecodes.services;
 
 import ua.com.fielden.platform.dao.IEntityDao;
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;

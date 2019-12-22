@@ -38,6 +38,9 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
+    public static boolean REGULATORY = false;
+    public static boolean KEY_SERVICE = true;
+    
     @IsProperty
     @MapTo
     @Title(value = "Number", desc = "A unique asset number, auto-generated.")
@@ -81,6 +84,24 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getNumber() {
         return number;
+    }
+    
+    public Asset setRegulatory(boolean isRegulatory) {
+        Asset.REGULATORY = isRegulatory;
+        return this;
+    }
+    
+    public Asset setKeyService(boolean isKeyService) {
+        Asset.KEY_SERVICE = isKeyService;
+        return this;
+    }
+    
+    public boolean getRegulatory() {
+        return Asset.REGULATORY;
+    }
+    
+    public boolean getKeyService() {
+        return Asset.KEY_SERVICE;
     }
 
     @Override
