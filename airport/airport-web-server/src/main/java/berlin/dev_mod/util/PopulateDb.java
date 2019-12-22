@@ -18,6 +18,9 @@ import berlin.config.ApplicationDomain;
 import berlin.personnel.Person;
 import berlin.tablecodes.assets.AssetClass;
 import berlin.tablecodes.assets.AssetType;
+import berlin.tablecodes.owners.BusinessUnit;
+import berlin.tablecodes.owners.Organisation;
+import berlin.tablecodes.owners.Role;
 import berlin.tablecodes.projects.Project;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -86,12 +89,14 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         setupPerson(User.system_users.SU, "berlin");
         
         final AssetClass as1 = save(new_(AssetClass.class).setName("AC1").setDesc("First description.").setActive(true));
-        save(new_(AssetClass.class).setName("AC2").setDesc("First description."));
-        save(new_(AssetType.class).setName("AT1").setDesc("First description.").setAssetClass(as1));
+        save(new_(AssetClass.class).setActive(true).setName("AC2").setDesc("First description."));
+        save(new_(AssetType.class).setActive(true).setName("AT1").setDesc("First description.").setAssetClass(as1));
         
-        final Asset asset1 = save(new_(Asset.class).setDesc("a demo asset 1"));
-        final Asset asset2 = save(new_(Asset.class).setDesc("a demo asset 2"));
-        final Asset asset3 = save(new_(Asset.class).setDesc("a demo asset 3"));
+        save(new_(Asset.class).setActive(true).setNumber("000005").setDesc("First description."));
+        
+        final Asset asset1 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 1"));
+        final Asset asset2 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 2"));
+        final Asset asset3 = save(new_(Asset.class).setActive(true).setDesc("a demo asset 3"));
         
         final AssetFinDet finDet1 = co$(AssetFinDet.class).findById(asset1.getId(), IAssetFinDet.FETCH_PROVIDER.fetchModel());
         save(finDet1.setInitCost(Money.of("120.00")).setAcquireDate(date("2019-12-07 00:00:00")));
@@ -102,7 +107,10 @@ public class PopulateDb extends DomainDrivenDataPopulation {
 
         save(new_(Project.class).setName("PROJECT 1").setStartDate(date("2019-12-08 00:00:00")).setDesc("Project 1 description"));
         save(new_(Project.class).setName("PROJECT 2").setStartDate(date("2020-01-02 00:00:00")).setDesc("Project 2 description"));
-
+        
+        save(new_(Role.class).setName("R1").setDesc("first role"));
+        save(new_(BusinessUnit.class).setName("BU1").setDesc("first business unit"));
+        save(new_(Organisation.class).setName("ORG1").setDesc("first organisation"));
 
         LOGGER.info("Completed database creation and population.");
 	}

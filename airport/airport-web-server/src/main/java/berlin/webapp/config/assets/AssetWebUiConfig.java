@@ -1,7 +1,8 @@
 package berlin.webapp.config.assets;
 
-import static java.lang.String.format;
 import static berlin.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
+import static java.lang.String.format;
+import static ua.com.fielden.platform.web.PrefDim.mkDim;
 
 import java.util.Optional;
 
@@ -10,21 +11,19 @@ import com.google.inject.Injector;
 import berlin.assets.Asset;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
-
-import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import berlin.main.menu.assets.MiAsset;
+import ua.com.fielden.platform.web.PrefDim.Unit;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
+import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
+import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
 import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
 import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
+import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import ua.com.fielden.platform.web.view.master.EntityMaster;
+import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
 import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
-import ua.com.fielden.platform.web.view.master.api.IMaster;
-import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
-import berlin.main.menu.assets.MiAsset;
-import ua.com.fielden.platform.web.centre.EntityCentre;
-import ua.com.fielden.platform.web.view.master.EntityMaster;
-import static ua.com.fielden.platform.web.PrefDim.mkDim;
-import ua.com.fielden.platform.web.PrefDim.Unit;
 /**
  * {@link Asset} Web UI configuration.
  *
