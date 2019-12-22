@@ -10,6 +10,7 @@ import com.google.inject.Injector;
 
 import berlin.assets.Asset;
 import berlin.assets.AssetOverseeing;
+import berlin.assets.AssetOwnership;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
 import berlin.main.menu.assets.MiAssetOverseeing;
