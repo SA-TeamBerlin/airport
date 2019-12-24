@@ -2,6 +2,7 @@ package berlin.tablecodes.assets;
 
 import berlin.tablecodes.validators.LongerThanValidator;
 import berlin.tablecodes.validators.NoSpacesValidator;
+import main.java.berlin.tablecodes.services.ServiceStatus;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
@@ -43,6 +44,7 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
 
+
     @IsProperty
     @MapTo
     @Title(value = "Name", desc = "Asset class name")
@@ -60,24 +62,31 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
     private Integer criticality;
 
     //(c) Yaroslav Boiko: it is special realization for getReportAboutError
+    @IsProperty
+    @MapTo
     @Title(value = "Type", desc = "Indicated if asset is regulatory(True) or not(False)")
+    @Final
     private boolean type;
 
     //(c) Yaroslav Boiko: it is special realization for getReportAboutError
+    @IsProperty
+    @MapTo
     @Title(value = "OccuredError", desc = "Indicated if it was not resolved problem with asset. If there is a problem, then the occuredError is True vice versa False")
+    @Final
     private boolean occuredError;
 
     //(c) Yaroslav Boiko: The method which helps to understand for users that they have a problem with their assets
+    @Observable
     public String getReportAboutError() {
-      String message;
-      if (this.type & this.occuredError) {
-        message = "Your ServiceStatus is interrupted";
-      } else if (this.type == false){
-        message = "Sorry.. but your Asset is not regulatory";
-      } else  {
-        message = "Congrutulations.. Today without problem";
-      }
-      return message;
+    	String message;
+    	if (this.type & this.occuredError) {
+    		message = "Your ServiceStatus is interrupted";
+    	} else if (this.type == false){
+    		message = "Sorry.. but your Asset is not regulatory";
+    	} else  {
+    		message = "Congrutulations.. Today without problem";
+    	}
+    	return message;
     }
 
     @Observable
