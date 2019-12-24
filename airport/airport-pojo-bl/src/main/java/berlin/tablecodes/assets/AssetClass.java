@@ -52,12 +52,53 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
         @Handler(value = LongerThanValidator.class, integer = @IntParam(name = "minLength", value = 3))})
     @UpperCase
     private String name;
-    
+
     @IsProperty
     @MapTo
     @Title(value = "Criticaly", desc = "Indicated how critical assets of this class are.")
     @Final
     private Integer criticality;
+
+    //(c) Yaroslav Boiko: it is special realization for getReportAboutError
+    @Title(value = "Type", desc = "Indicated if asset is regulatory(True) or not(False)")
+    private boolean type;
+
+    //(c) Yaroslav Boiko: it is special realization for getReportAboutError
+    @Title(value = "OccuredError", desc = "Indicated if it was not resolved problem with asset. If there is a problem, then the occuredError is True vice versa False")
+    private boolean occuredError;
+
+    //(c) Yaroslav Boiko: The method which helps to understand for users that they have a problem with their assets
+    public String getReportAboutError() {
+      String message;
+      if (this.type & this.occuredError) {
+        message = "Your ServiceStatus is interrupted";
+      } else if (this.type == false){
+        message = "Sorry.. but your Asset is not regulatory";
+      } else  {
+        message = "Congrutulations.. Today without problem";
+      }
+      return message;
+    }
+
+    @Observable
+    public AssetClass setType(final boolean type) {
+        this.type = type;
+        return this;
+    }
+
+    public boolean getType() {
+        return type;
+    }
+
+    @Observable
+    public AssetClass setOccuredError(final boolean occuredError) {
+        this.occuredError = occuredError;
+        return this;
+    }
+
+    public boolean getOccuredError() {
+        return occuredError;
+    }
 
     @Observable
     public AssetClass setCriticality(final Integer criticality) {
@@ -85,7 +126,7 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
         super.setDesc(desc);
         return this;
     }
-    
+
     @Override
     @Observable
     public AssetClass setActive(boolean active) {
