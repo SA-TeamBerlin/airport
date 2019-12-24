@@ -60,19 +60,23 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
     private Integer criticality;
 
     //(c) Yaroslav Boiko: it is special realization for getReportAboutError
-    @Title(value = "Type", desc = "Indicated if asset is regulatory(True) or not(False)")
-    private boolean type;
+    @IsProperty
+    @MapTo
+    @Title(value = "regulatory", desc = "Indicated if asset is regulatory(True) or not(False)")
+    private boolean regulatory;
 
     //(c) Yaroslav Boiko: it is special realization for getReportAboutError
+    @IsProperty
+    @MapTo
     @Title(value = "OccuredError", desc = "Indicated if it was not resolved problem with asset. If there is a problem, then the occuredError is True vice versa False")
     private boolean occuredError;
 
     //(c) Yaroslav Boiko: The method which helps to understand for users that they have a problem with their assets
     public String getReportAboutError() {
       String message;
-      if (this.type & this.occuredError) {
+      if (this.regulatory & this.occuredError) {
         message = "Your ServiceStatus is interrupted";
-      } else if (this.type == false){
+      } else if (this.regulatory == false){
         message = "Sorry.. but your Asset is not regulatory";
       } else  {
         message = "Congrutulations.. Today without problem";
@@ -81,13 +85,13 @@ public class AssetClass extends ActivatableAbstractEntity<DynamicEntityKey> {
     }
 
     @Observable
-    public AssetClass setType(final boolean type) {
-        this.type = type;
+    public AssetClass setRegulatory(final boolean regulatory) {
+        this.regulatory = regulatory;
         return this;
     }
 
-    public boolean getType() {
-        return type;
+    public boolean getRegulatory() {
+        return regulatory;
     }
 
     @Observable
