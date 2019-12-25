@@ -62,7 +62,7 @@
     {Table of Contents}%
 }
 
-\title{Your System User Manual}
+\title{Berlin Airport Asset Acquisition Application User Manual}
 \author{Your Company}
 \date{\today}
 \usepackage{hyperxmp}
@@ -131,43 +131,84 @@
 	\onehalfspacing
 	\pagenumbering{roman}
   \begin{titlepage}
-  \centering
-    \vspace*{0.5 cm}
-  \rule{\linewidth}{0.2 mm} \\[0.4cm]
-  \begin{spacing}{1.1}
-    \huge \bfseries Your System\\[0.3cm]
-    \LARGE User Manual
-  \end{spacing}
-  \rule{\linewidth}{0.2 mm} \\[1 cm]
-  \textsc{\large $System Version$}\\[4cm]
-  \clearpage
-  
-  \setcounter{page}{1}
-  \justifying
-  A brief synopsis about the system goes here\ldots
-  \clearpage
-    
-  \setcounter{tocdepth}{3}
-  \tableofcontents
-  \clearpage
-  
+      \centering
+        \vspace*{0.5 cm}
+      \rule{\linewidth}{0.2 mm} \\[0.4cm]
+      \begin{spacing}{1.1}
+        \huge \bfseries Berlin Airport Asset Acquisition Application\\[0.3cm]
+        \LARGE User Manual
+      \end{spacing}
+      \rule{\linewidth}{0.2 mm} \\[1 cm]
+      \large \bfseries Team Berlin: \\
+        Myroslava Romaniuk : code + user manual \\
+        Andrian Hevalo : user manual \\
+        Yaroslav Boiko : code \\
+        Daryna Dzhala : code \\
+        Oleksandr Potapov : code
+      \clearpage
+      
+      \setcounter{page}{1}
+      \justifying Synopsis about the system:
+
+      The file you are reading was written to make this project easy to use,
+      and the idea behind it understanable. It is a quick guide into project
+      features, user stories, as well as how to start using it.
+      
+      In general, the project is a Java application asset management platform
+      created for the Berlin airport.
+
+      Basically, the main basis for the platform was already implemented,
+      but our main task was to extend its functionality by implementing user stories
+      and therefore satisfying the needs of our various users. 
+      \clearpage
+        
+      \setcounter{tocdepth}{3}
+      \tableofcontents
+      \clearpage
   \end{titlepage}
-    \pagenumbering{arabic}
-    \section{Section 1 Title}\label{sec:01}
 
+  \pagenumbering{arabic}
+  \section{TG background}\label{sec:01}
+  TG exists to remove many low level technical obstacles that are
+  often associated with building sophisticated transnational applications
+  such as Enterprise Asset Maintenance (EAM) or Enterprise Resource Planning
+  (ERP) systems. We have successfully used TG for developing large-scale and
+  mission-critical enterprise applications.
+
+  With TG, we look at the system design as the decomposition problem,
+  which can be solved successfully with the right approach in the right context.
+  TG establishes a well defined pattern for modelling business domains,
+  including domain entities, processes and their inter-dependencies (down to the
+  level of properties with automatic revalidation support).
+  
+  At the code level the
+  description of the domain model is achieved by using a small set of base classes
+  and various annotations. Together these constitute what we refer to as "Entity
+  Definition Language" (EDL), which is complemented by "Entity Query Language"
+  (EQL) for data querying (relational databases).
+  \clearpage
+
+  \section{Main ideas for our version of the platform}\label{sec:02}
   \hyperref[sec:01_01:fig:01]{Fig.~\ref*{sec:01_01:fig:01}} illustrates the main menu of your system.
-
 	\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/01-main-menu.png}
 	\caption{Application main menu.}\label{sec:01_01:fig:01}
-	\end{figure}
+  \end{figure}
+  \clearpage
 
-  \subsection{Subsection 1.1 if needed}
-  \subsection{Subsection 1.2 if needed}
+  \section{User stories}\label{sec:03}
+  \clearpage
 
-  \section{Section 2 Title}\label{sec:02}
+  \section{Tiles: Asset Acquisition}\label{sec:04}
+  \clearpage
 
-  \subsection{Subsection 2.1 if needed}
-  \subsection{Subsection 2.2 if needed}
+  \section{Tiles: Users / Personnel}\label{sec:05}
+  \clearpage
+
+  \section{Tiles: Table Codes}\label{sec:06}
+  \clearpage
+
+  \section{Project Summary}\label{sec:07}
+  \clearpage
 \end{document}
