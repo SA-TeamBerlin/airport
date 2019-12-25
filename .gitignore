@@ -20,6 +20,8 @@
 *.kate-swp
 *.~*
 *.tps
+*.fdb_latexmk
+*.fls
 target
 .classpath
 .project
