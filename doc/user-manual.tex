@@ -1,0 +1,173 @@
+\documentclass[a4paper, 12pt, final]{hitec}
+\usepackage[T1]{fontenc} % this makes text underscore look better
+\usepackage{textcomp} % load symbol definitions
+\usepackage{underscore} % allows the use of _ in text without escaping
+\usepackage[english]{babel}
+\usepackage[english]{isodate}
+\usepackage[parfill]{parskip}
+\usepackage{ragged2e}
+\usepackage{appendix}
+%\usepackage[none]{hyphenat}% enable to switch off hypenation
+\usepackage{times}
+\usepackage{setspace}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\usepackage{tabulary}
+\usepackage{longtable}
+\usepackage{inputenc}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{fancyvrb}
+\usepackage{alltt}
+\usepackage{moreverb}
+\usepackage[singlelinecheck=false, justification=centering]{caption}
+\usepackage{booktabs,array}
+\newcolumntype{?}{!{\vrule width 1pt}}
+\makeatletter
+\def\thickhline{%
+  \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+   \reserved@a\@xthickhline}
+\def\@xthickhline{\ifx\reserved@a\thickhline
+               \vskip\doublerulesep
+               \vskip-\thickarrayrulewidth
+             \fi
+      \ifnum0=`{\fi}}
+\makeatother
+
+\newlength{\thickarrayrulewidth}
+\setlength{\thickarrayrulewidth}{2\arrayrulewidth}
+% for more info on hyperref package see http://en.wikibooks.org/wiki/LaTeX/Packages/Hyperref
+\usepackage[pdftex,colorlinks=true,linkcolor=BlueViolet]{hyperref}
+
+\addto{\captionsenglish}{\renewcommand{\abstractname}{Executive Summary}}
+
+\usepackage{lastpage}
+
+\renewcommand{\baselinestretch}{1.1}
+
+%% important to have floats such as tables stick to the top if option [t!] is used
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\let\footruleskip\undefined
+\usepackage{fancyhdr}
+
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Table of Contents}%
+}
+
+\title{Your System User Manual}
+\author{Your Company}
+\date{\today}
+\usepackage{hyperxmp}
+\hypersetup{
+    pdftitle={User Manual: how to use you system},
+    pdfauthor={Your Company},
+    pdfsubject={Once sentence description on the manual.},
+    pdfcopyright={Copyright (C) 2019 by Your Company.  All rights reserved.}
+}
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+%\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\captionsetup[table]{font=footnotesize, labelfont=bf}
+\captionsetup[figure]{font=footnotesize, labelfont=bf}
+\captionsetup[subfigure]{font=scriptsize, labelfont=bf}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT MARGINS
+%----------------------------------------------------------------------------------------
+
+%\textwidth 6.75in
+\textheight 25cm
+%\oddsidemargin -.25in
+%\evensidemargin -.25in
+\topmargin -1cm
+%\longindentation 0.50\textwidth
+%\parindent 0.2in
+
+%----------------------------------------------------------------------------------------
+%	TIKZ magic
+%----------------------------------------------------------------------------------------
+
+\usepackage{tikz}
+\usetikzlibrary{shadows}
+
+\newcommand*\keystroke[1]{%
+  \tikz[baseline=(key.base)]
+    \node[%
+      draw,
+      fill=white,
+      drop shadow={shadow xshift=0.25ex,shadow yshift=-0.25ex,fill=black,opacity=0.75},
+      rectangle,
+      rounded corners=2pt,
+      inner sep=1pt,
+      line width=0.5pt,
+      font=\scriptsize\sffamily,
+      minimum width=1.2em
+    ](key) {#1\strut};
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT CONTENT
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	\onehalfspacing
+	\pagenumbering{roman}
+  \begin{titlepage}
+  \centering
+    \vspace*{0.5 cm}
+  \rule{\linewidth}{0.2 mm} \\[0.4cm]
+  \begin{spacing}{1.1}
+    \huge \bfseries Your System\\[0.3cm]
+    \LARGE User Manual
+  \end{spacing}
+  \rule{\linewidth}{0.2 mm} \\[1 cm]
+  \textsc{\large $System Version$}\\[4cm]
+  \clearpage
+  
+  \setcounter{page}{1}
+  \justifying
+  A brief synopsis about the system goes here\ldots
+  \clearpage
+    
+  \setcounter{tocdepth}{3}
+  \tableofcontents
+  \clearpage
+  
+  \end{titlepage}
+    \pagenumbering{arabic}
+    \section{Section 1 Title}\label{sec:01}
+
+  \hyperref[sec:01_01:fig:01]{Fig.~\ref*{sec:01_01:fig:01}} illustrates the main menu of your system.
+
+	\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.95\linewidth]{images/01-main-menu.png}
+	\caption{Application main menu.}\label{sec:01_01:fig:01}
+	\end{figure}
+
+  \subsection{Subsection 1.1 if needed}
+  \subsection{Subsection 1.2 if needed}
+
+  \section{Section 2 Title}\label{sec:02}
+
+  \subsection{Subsection 2.1 if needed}
+  \subsection{Subsection 2.2 if needed}
+\end{document}
