@@ -5,7 +5,7 @@ This project is now up-to-date with the latest changes (basically everything we'
 ### Home assignments
 - [x] implemented user stories AC03-AC05 and AC08-AC09 (skipped through AC06-AC07 per instructions)
 - [x] made some progress with implementing AC10-15
-- [x] started working on the user manual for the application
+- [x] made the user manual for the application
 
 
 ### Developer Manual
