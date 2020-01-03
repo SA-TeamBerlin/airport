@@ -1,5 +1,7 @@
 package berlin.assets;
 
+import java.math.BigDecimal;
+
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
@@ -51,6 +53,21 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
     @Title(value = "Fin Det", desc = "Financial details for this asset")
     private AssetFinDet finDet;
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Loading rate", desc = "loading rate for asset")
+    private String loadingRate;
+
+    @Observable
+    public Asset setLoadingRate(final String loadingRate) {
+        this.loadingRate = loadingRate;
+        return this;
+    }
+
+    public String getLoadingRate() {
+        return loadingRate;
+    }
 
     @Observable
     protected Asset setFinDet(final AssetFinDet finDet) {
