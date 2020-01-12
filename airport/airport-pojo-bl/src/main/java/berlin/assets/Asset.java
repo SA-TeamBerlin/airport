@@ -55,8 +55,19 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
-    public static boolean REGULATORY = false;
-    public static boolean KEY_SERVICE = true;
+    //public static boolean REGULATORY = false;
+    //public static boolean KEY_SERVICE = true;
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Regulatory", desc = "Regulatory")
+    private boolean regulatory;
+
+    @IsProperty
+    @MapTo
+    @Title(value = "KeyService", desc = "KeyService")
+    private boolean keyService;
+    
     
     @IsProperty
     @MapTo
@@ -168,23 +179,45 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return number;
     }
     
-    public Asset setRegulatory(boolean isRegulatory) {
-        Asset.REGULATORY = isRegulatory;
+
+    @Observable
+    public Asset setRegulatory(final boolean regulatory) {
+        this.regulatory= regulatory;
         return this;
     }
-    
-    public Asset setKeyService(boolean isKeyService) {
-        Asset.KEY_SERVICE = isKeyService;
-        return this;
-    }
-    
+
+    @Observable
     public boolean getRegulatory() {
-        return Asset.REGULATORY;
+        return regulatory;
     }
-    
+
+    @Observable
+    public Asset setKeyService(final boolean keyService) {
+        this.keyService = keyService;
+        return this;
+    }
+
+    @Observable
     public boolean getKeyService() {
-        return Asset.KEY_SERVICE;
+        return keyService;
     }
+//    public Asset setRegulatory(boolean isRegulatory) {
+//        Asset.REGULATORY = isRegulatory;
+//        return this;
+//    }
+//    
+//    public Asset setKeyService(boolean isKeyService) {
+//        Asset.KEY_SERVICE = isKeyService;
+//        return this;
+//    }
+//    
+//    public boolean getRegulatory() {
+//        return Asset.REGULATORY;
+//    }
+//    
+//    public boolean getKeyService() {
+//        return Asset.KEY_SERVICE;
+//    }
 
     @Override
     @Observable
