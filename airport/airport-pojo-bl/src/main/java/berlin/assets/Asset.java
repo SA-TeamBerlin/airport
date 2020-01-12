@@ -39,7 +39,10 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(Asset.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
-
+    
+    public static boolean REGULATORY = false;
+    public static boolean KEY_SERVICE = true;
+    
     @IsProperty
     @MapTo
     @Title(value = "Number", desc = "A unique asset number, auto-generated.")
@@ -55,17 +58,6 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Title(value = "Loading rate", desc = "loading rate for asset")
     private String loadingRate;
-    private AssetOwnership currOwnership;
-
-    @IsProperty
-    @MapTo
-    @Title(value = "REGULATORY", desc = "A flag for Assets that are legally regulated.")
-    private boolean REGULATORY;
-
-    @IsProperty
-    @MapTo
-    @Title(value = "KEY_SERVICE", desc = "A flag for Assets that are 'key service' assets.")
-    private boolean KEY_SERVICE;
 
     @Observable
     public Asset setLoadingRate(final String loadingRate) {
@@ -110,36 +102,24 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     public String getNumber() {
         return number;
     }
-
-    @Observable
-    protected Asset setCurrOwnership(final AssetOwnership currOwnership) {
-        this.currOwnership = currOwnership;
-        return this;
-    }
-
-    public AssetOwnership getCurrOwnership() {
-        return currOwnership;
-    }
-
-
+    
     public Asset setRegulatory(boolean isRegulatory) {
-        this.REGULATORY = isRegulatory;
+        Asset.REGULATORY = isRegulatory;
         return this;
     }
     
     public Asset setKeyService(boolean isKeyService) {
-        this.KEY_SERVICE = isKeyService;
+        Asset.KEY_SERVICE = isKeyService;
         return this;
     }
     
     public boolean getRegulatory() {
-        return this.REGULATORY;
+        return Asset.REGULATORY;
     }
     
     public boolean getKeyService() {
-        return this.KEY_SERVICE;
+        return Asset.KEY_SERVICE;
     }
-
 
     @Override
     @Observable

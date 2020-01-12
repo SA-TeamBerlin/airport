@@ -1,7 +1,5 @@
 package berlin.tablecodes.services;
 
-import berlin.assets.Asset;
-import berlin.assets.AssetMaintenance;
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
@@ -13,9 +11,6 @@ import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Title;
-import ua.com.fielden.platform.entity.annotation.DateOnly;
-import java.util.Date;
-
 import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
@@ -46,28 +41,15 @@ public class ServiceStatus extends AbstractPersistentEntity<DynamicEntityKey> {
     @MapTo
     @Title(value = "Service Status", desc = "Desc")
     @CompositeKeyMember(1)
-    private ServiceStatus name;
-
-    @IsProperty
-    @MapTo
-    @Title(value = "Asset", desc = "Associated asset")
-    @CompositeKeyMember(1)
-    private Asset asset;
-
-    @IsProperty
-    @MapTo
-    @Title(value = "Start Date", desc = "The start date of the service")
-    @CompositeKeyMember(2)
-    @DateOnly
-    private Date startDate;
+    private String name;
 
     @Observable
-    public ServiceStatus setName(final ServiceStatus name) {
+    public ServiceStatus setName(final String name) {
         this.name = name;
         return this;
     }
 
-    public ServiceStatus getName() {
+    public String getName() {
         return name;
     }
 
@@ -77,38 +59,5 @@ public class ServiceStatus extends AbstractPersistentEntity<DynamicEntityKey> {
         super.setDesc(desc);
         return this;
     }
-
-    @Observable
-    public ServiceStatus setAsset(final Asset asset) {
-        this.asset = asset;
-        return this;
-    }
-
-    public Asset getAsset() {
-        return asset;
-    }
-
-
-    @Observable
-    public ServiceStatus setStartDate(final Date startDate) {
-        this.startDate = startDate;
-        return this;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    @Observable
-    public ServiceStatus setServiceStatus(final ServiceStatus serviceStatus) {
-        this.name = serviceStatus;
-        return this;
-    }
-
-    public ServiceStatus getServiceStatus() {
-        return name;
-    }
-
-
 
 }
