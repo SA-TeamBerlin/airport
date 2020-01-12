@@ -26,6 +26,7 @@ public class AssetServiceStatusDao extends CommonEntityDao<AssetServiceStatus> i
         final AssetServiceStatus assetServiceStatus = super.new_();
         //assetservicestatus.getProperty("asset").setRequired(true);
         assetServiceStatus.getProperty("startDate").setRequired(true);
+        //assetServiceStatus.getProperty("currService.name").setRequired(true);
         return assetServiceStatus;
     }
     @Override

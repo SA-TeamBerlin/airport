@@ -1,5 +1,8 @@
 package berlin.tablecodes.assets;
 
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.select;
+
 import java.util.Date;
 
 import javax.xml.crypto.Data;
@@ -10,13 +13,20 @@ import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
+import ua.com.fielden.platform.entity.annotation.Calculated;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.DateOnly;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
+import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
+import ua.com.fielden.platform.entity.annotation.mutator.AfterChange;
+import ua.com.fielden.platform.entity.annotation.titles.PathTitle;
+import ua.com.fielden.platform.entity.annotation.titles.Subtitles;
+import ua.com.fielden.platform.entity.query.model.EntityResultQueryModel;
+import ua.com.fielden.platform.entity.query.model.ExpressionModel;
 import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
@@ -74,7 +84,30 @@ public class AssetServiceStatus extends AbstractPersistentEntity<DynamicEntityKe
     public Date getStartDate() {
         return startDate;
     }
-       
-    //inintialization_of_servise_status 
+    
+    // here is new lines
+    @IsProperty
+    //@MapTo
+    @Calculated
+    @Title(value = "Service Status", desc = "Service status of an asset")
+    @Subtitles({@PathTitle(path = "name", title = "Service Status")})
+    private ServiceStatus currService;
+    
+    
+    private static final EntityResultQueryModel <ServiceStatus> SerSubQuery = select(ServiceStatus.class).
+                                                                        model(); 
+     
+    protected static final ExpressionModel currService_ = expr().model(select(ServiceStatus.class).where().
+            notExists(SerSubQuery).model()).model();
+
+    @Observable
+    public AssetServiceStatus setCurrService(final ServiceStatus currService) {
+        this.currService = currService;
+        return this;
+    }
+
+    public ServiceStatus getCurrService() {
+        return currService;
+    }
     
 }

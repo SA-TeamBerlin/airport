@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import berlin.tablecodes.assets.AssetServiceStatus;
+import berlin.tablecodes.services.ServiceStatus;
 import berlin.assets.Asset;
 import berlin.common.LayoutComposer;
 import berlin.common.StandardActions;
@@ -55,7 +56,7 @@ public class AssetServiceStatusWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<AssetServiceStatus> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(1, 3);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(AssetServiceStatus.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(AssetServiceStatus.class);
@@ -72,7 +73,8 @@ public class AssetServiceStatusWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("asset").asMulti().autocompleter(Asset.class).also()
-                .addCrit("startDate").asRange().date()
+                .addCrit("startDate").asRange().date().also()
+                .addCrit("currService.name").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -80,7 +82,8 @@ public class AssetServiceStatusWebUiConfig {
                 .addProp("asset").order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", AssetServiceStatus.ENTITY_TITLE))
                     .withActionSupplier(builder.getOpenMasterAction(Asset.class)).also()
-                .addProp("startDate").order(2).desc().width(150)
+                .addProp("startDate").width(150).also()
+                .addProp("currService.name").minWidth(200)
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -94,11 +97,12 @@ public class AssetServiceStatusWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<AssetServiceStatus> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 3);
 
         final IMaster<AssetServiceStatus> masterConfig = new SimpleMasterBuilder<AssetServiceStatus>().forEntity(AssetServiceStatus.class)
                 .addProp("asset").asAutocompleter().also()
                 .addProp("startDate").asDatePicker().also()
+                .addProp("currService.name").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

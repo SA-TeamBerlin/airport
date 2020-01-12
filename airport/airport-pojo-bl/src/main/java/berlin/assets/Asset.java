@@ -66,31 +66,33 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Title(value = "Loading rate", desc = "loading rate for asset")
     private String loadingRate;
     
-    @IsProperty
-    @MapTo
-    //@Calculated
-    @Title(value = "Current Service Status", desc = "Desc")
-    @Subtitles({@PathTitle(path = "startDate", title = "Service Status Start Date")})
-    private AssetServiceStatus currAssetServiceStatus;
     
-    //private static final EntityResultQueryModel <AssetServiceStatus> SubQuery = select(AssetServiceStatus.class).where()
-//                                                                                        .prop("asset").eq().extProp("asset").and()
-//                                                                                        .prop("startDate").le().now().and()
-//                                                                                        .prop("startDate").gt().extProp("startDate").model(); 
-//                                                                                 
-//    protected static final ExpressionModel currSeviceStatus_ = expr().model(select(AssetServiceStatus.class).where()
-//                                                                                         .prop("asset").eq().extProp("id").and()
-//                                                                                         .prop("startDate").le().now().and()
-//                                                                                         .notExists(SubQuery).model()).model();
+    @IsProperty
+    @Calculated
+    @Title(value = "Current Service Status", desc = "Desc")
+    @Subtitles({@PathTitle(path = "startDate", title = "Service Status Start Date"),
+                @PathTitle(path = "currService", title = "Service Status")})
+                
+    private AssetServiceStatus currServiceStatus;
+    
+    private static final EntityResultQueryModel <AssetServiceStatus> SubQuery = select(AssetServiceStatus.class).where()
+                                                                                        .prop("asset").eq().extProp("asset").and()
+                                                                                        .prop("startDate").le().now().and()
+                                                                                        .prop("startDate").gt().extProp("startDate").model(); 
+                                                                                 
+    protected static final ExpressionModel currServiceStatus_ = expr().model(select(AssetServiceStatus.class).where()
+                                                                                         .prop("asset").eq().extProp("id").and()
+                                                                                         .prop("startDate").le().now().and()
+                                                                                         .notExists(SubQuery).model()).model();
 
     @Observable  
-    public Asset setCurrAssetServiceStatus(final AssetServiceStatus currAssetServiceStatus) {
-        this.currAssetServiceStatus = currAssetServiceStatus;
+    public Asset setCurrServiceStatus(final AssetServiceStatus currAssetServiceStatus) {
+        this.currServiceStatus = currAssetServiceStatus;
         return this;
     }
    
-    public AssetServiceStatus getCurrAssetServiceStatus() {
-        return currAssetServiceStatus;
+    public AssetServiceStatus getCurrServiceStatus() {
+        return currServiceStatus;
     }
     
     @Observable
