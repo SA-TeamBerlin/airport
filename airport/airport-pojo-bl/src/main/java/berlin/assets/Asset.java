@@ -3,6 +3,14 @@ package berlin.assets;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.select;
 
+// imports for Darka
+import java.math.BigDecimal;
+
+import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
+import ua.com.fielden.platform.entity.annotation.mutator.Handler;
+import berlin.assets.validators.RateValidator;
+//
+
 import berlin.tablecodes.assets.AssetServiceStatus;
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
@@ -63,8 +71,27 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
     @MapTo
+    @BeforeChange(@Handler(RateValidator.class))
     @Title(value = "Loading rate", desc = "loading rate for asset")
     private String loadingRate;
+    
+    //Darka_version
+    @Observable
+    public Asset setLoadingRate(final String loadingRate) {
+        if (!loadingRate.substring(loadingRate.length() - 1, loadingRate.length()).equals("%")) {
+            this.loadingRate = loadingRate.concat("%");}
+        else {
+            this.loadingRate = loadingRate;
+        }
+
+        return this;
+    }
+    
+    @Observable
+    public String getLoadingRate() {
+        return loadingRate.substring(0, loadingRate.length() - 1);
+    }
+    
     
     
     @IsProperty
@@ -95,15 +122,17 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return currServiceStatus;
     }
     
-    @Observable
-    public Asset setLoadingRate(final String loadingRate) {
-        this.loadingRate = loadingRate;
-        return this;
-    }
-
-    public String getLoadingRate() {
-        return loadingRate;
-    }
+    
+    
+//    @Observable
+//    public Asset setLoadingRate(final String loadingRate) {
+//        this.loadingRate = loadingRate;
+//        return this;
+//    }
+//
+//    public String getLoadingRate() {
+//        return loadingRate;
+//    }
 
     @Observable
     protected Asset setFinDet(final AssetFinDet finDet) {
