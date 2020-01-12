@@ -1,10 +1,13 @@
 package berlin.assets;
 
-import java.math.BigDecimal;
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.select;
 
+import berlin.tablecodes.assets.AssetServiceStatus;
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
+import ua.com.fielden.platform.entity.annotation.Calculated;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.DescRequired;
@@ -18,6 +21,10 @@ import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Readonly;
 import ua.com.fielden.platform.entity.annotation.Title;
+import ua.com.fielden.platform.entity.annotation.titles.PathTitle;
+import ua.com.fielden.platform.entity.annotation.titles.Subtitles;
+import ua.com.fielden.platform.entity.query.model.EntityResultQueryModel;
+import ua.com.fielden.platform.entity.query.model.ExpressionModel;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -58,7 +65,34 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Title(value = "Loading rate", desc = "loading rate for asset")
     private String loadingRate;
+    
+    @IsProperty
+    @MapTo
+    //@Calculated
+    @Title(value = "Current Service Status", desc = "Desc")
+    @Subtitles({@PathTitle(path = "startDate", title = "Service Status Start Date")})
+    private AssetServiceStatus currAssetServiceStatus;
+    
+    //private static final EntityResultQueryModel <AssetServiceStatus> SubQuery = select(AssetServiceStatus.class).where()
+//                                                                                        .prop("asset").eq().extProp("asset").and()
+//                                                                                        .prop("startDate").le().now().and()
+//                                                                                        .prop("startDate").gt().extProp("startDate").model(); 
+//                                                                                 
+//    protected static final ExpressionModel currSeviceStatus_ = expr().model(select(AssetServiceStatus.class).where()
+//                                                                                         .prop("asset").eq().extProp("id").and()
+//                                                                                         .prop("startDate").le().now().and()
+//                                                                                         .notExists(SubQuery).model()).model();
 
+    @Observable  
+    public Asset setCurrAssetServiceStatus(final AssetServiceStatus currAssetServiceStatus) {
+        this.currAssetServiceStatus = currAssetServiceStatus;
+        return this;
+    }
+   
+    public AssetServiceStatus getCurrAssetServiceStatus() {
+        return currAssetServiceStatus;
+    }
+    
     @Observable
     public Asset setLoadingRate(final String loadingRate) {
         this.loadingRate = loadingRate;

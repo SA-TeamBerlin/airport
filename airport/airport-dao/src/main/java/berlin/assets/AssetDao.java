@@ -72,6 +72,7 @@ public class AssetDao extends CommonEntityDao<Asset> implements IAsset {
     public Asset new_() {
         final Asset asset = super.new_();
         asset.setNumber(DEFAULT_ASSET_NUMBER);
+        //asset.getProperty("currAssetServiceStatus").setRequired(true);
         return asset;
     }
 

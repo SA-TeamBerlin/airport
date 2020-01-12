@@ -84,7 +84,8 @@ public class AssetWebUiConfig {
                     .addProp("desc").minWidth(200).also()
                     .addProp("loadingRate").minWidth(150).also()
                     .addProp("finDet.initCost").width(150).also()
-                    .addProp("finDet.acquireDate").width(150)
+                    .addProp("finDet.acquireDate").width(150).also()
+                    .addProp("currAssetServiceStatus.startDate").order(2).desc().width(150)     
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -98,12 +99,13 @@ public class AssetWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Asset> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(1, 1, 1, 1);
 
         final IMaster<Asset> masterConfig = new SimpleMasterBuilder<Asset>().forEntity(Asset.class)
                 .addProp("number").asSinglelineText().also()
                 .addProp("loadingRate").asMultilineText().also()
                 .addProp("desc").asMultilineText().also()
+                .addProp("currAssetServiceStatus.startDate").asDatePicker().also()             
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())
