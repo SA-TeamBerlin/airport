@@ -1,5 +1,8 @@
 package berlin.assets;
 
+import java.math.BigDecimal;
+
+
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
@@ -13,6 +16,7 @@ import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
+import ua.com.fielden.platform.entity.annotation.mutator.Handler;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Readonly;
 import ua.com.fielden.platform.entity.annotation.Title;
@@ -38,6 +42,9 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
+    public static boolean REGULATORY = false;
+    public static boolean KEY_SERVICE = true;
+    
     @IsProperty
     @MapTo
     @Title(value = "Number", desc = "A unique asset number, auto-generated.")
@@ -48,6 +55,45 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
     @Title(value = "Fin Det", desc = "Financial details for this asset")
     private AssetFinDet finDet;
+    
+    @IsProperty
+    @MapTo
+    @BeforeChange(@Handler(RateValidator.class))
+    @Title(value = "Loading rate", desc = "loading rate for asset")
+    private String loadingRate;
+    
+    //My version
+    @Observable
+    public Asset setLoadingRate(final String loadingRate) {
+        if (!loadingRate.substring(loadingRate.length() - 1, loadingRate.length()).equals("%")) {
+            this.loadingRate = loadingRate.concat("%");}
+        else {
+            this.loadingRate = loadingRate;
+        }
+
+        return this;
+    }
+
+    @Observable
+    public String getLoadingRate() {
+        return loadingRate.substring(0, loadingRate.length() - 1);
+    }
+   
+    //-My version
+    
+    
+    //Myroslava version
+    //@Observable
+    //public Asset setLoadingRate(final String loadingRate) {
+    //    this.loadingRate = loadingRate;
+    //    return this;
+    //}
+
+    //public String getLoadingRate() {
+    //    return loadingRate;
+    //}
+    
+    // - Myroslava version
 
     @Observable
     protected Asset setFinDet(final AssetFinDet finDet) {
@@ -81,6 +127,24 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getNumber() {
         return number;
+    }
+    
+    public Asset setRegulatory(boolean isRegulatory) {
+        Asset.REGULATORY = isRegulatory;
+        return this;
+    }
+    
+    public Asset setKeyService(boolean isKeyService) {
+        Asset.KEY_SERVICE = isKeyService;
+        return this;
+    }
+    
+    public boolean getRegulatory() {
+        return Asset.REGULATORY;
+    }
+    
+    public boolean getKeyService() {
+        return Asset.KEY_SERVICE;
     }
 
     @Override
