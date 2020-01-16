@@ -13,5 +13,9 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface IAsset extends IEntityDao<Asset> {
 
     static final IFetchProvider<Asset> FETCH_PROVIDER = EntityUtils.fetch(Asset.class).with(
-        "number", "desc", "loadingRate");
+        "number", "desc", "loadingRate")
+        .with("currServiceStatus.startDate", "currServiceStatus.currService.name")
+        .with("regulatory", "keyService");
+
+    
 }

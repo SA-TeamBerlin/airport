@@ -7,6 +7,7 @@ import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
+import ua.com.fielden.platform.entity.annotation.DateOnly;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
@@ -39,8 +40,9 @@ public class ServiceStatus extends AbstractPersistentEntity<DynamicEntityKey> {
     
     @IsProperty
     @MapTo
-    @Title(value = "Service Status", desc = "Desc")
+    @Title(value = "Service Status", desc = "Service Status")
     @CompositeKeyMember(1)
+    //@DateOnly
     private String name;
 
     @Observable

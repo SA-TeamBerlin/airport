@@ -1,10 +1,21 @@
 package berlin.assets;
 
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
+import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.select;
+
+// imports for Darka
 import java.math.BigDecimal;
 
+import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
+import ua.com.fielden.platform.entity.annotation.mutator.Handler;
+import berlin.assets.validators.RateValidator;
+//
+
+import berlin.tablecodes.assets.AssetServiceStatus;
 import berlin.tablecodes.assets.AssetType;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
+import ua.com.fielden.platform.entity.annotation.Calculated;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.DescRequired;
@@ -18,6 +29,10 @@ import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
 import ua.com.fielden.platform.entity.annotation.Readonly;
 import ua.com.fielden.platform.entity.annotation.Title;
+import ua.com.fielden.platform.entity.annotation.titles.PathTitle;
+import ua.com.fielden.platform.entity.annotation.titles.Subtitles;
+import ua.com.fielden.platform.entity.query.model.EntityResultQueryModel;
+import ua.com.fielden.platform.entity.query.model.ExpressionModel;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -40,8 +55,19 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
-    public static boolean REGULATORY = false;
-    public static boolean KEY_SERVICE = true;
+    //public static boolean REGULATORY = false;
+    //public static boolean KEY_SERVICE = true;
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Regulatory", desc = "Regulatory")
+    private boolean regulatory;
+
+    @IsProperty
+    @MapTo
+    @Title(value = "KeyService", desc = "KeyService")
+    private boolean keyService;
+    
     
     @IsProperty
     @MapTo
@@ -56,18 +82,68 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
     @MapTo
+    @BeforeChange(@Handler(RateValidator.class))
     @Title(value = "Loading rate", desc = "loading rate for asset")
     private String loadingRate;
-
+    
+    //Darka_version
     @Observable
     public Asset setLoadingRate(final String loadingRate) {
-        this.loadingRate = loadingRate;
+        if (!loadingRate.substring(loadingRate.length() - 1, loadingRate.length()).equals("%")) {
+            this.loadingRate = loadingRate.concat("%");}
+        else {
+            this.loadingRate = loadingRate;
+        }
+
         return this;
     }
-
+    
+    @Observable
     public String getLoadingRate() {
-        return loadingRate;
+        return loadingRate.substring(0, loadingRate.length() - 1);
     }
+    
+    
+    
+    @IsProperty
+    @Calculated
+    @Title(value = "Current Service Status", desc = "Desc")
+    @Subtitles({@PathTitle(path = "startDate", title = "Service Status Start Date"),
+                @PathTitle(path = "currService", title = "Service Status")})
+                
+    private AssetServiceStatus currServiceStatus;
+    
+    private static final EntityResultQueryModel <AssetServiceStatus> SubQuery = select(AssetServiceStatus.class).where()
+                                                                                        .prop("asset").eq().extProp("asset").and()
+                                                                                        .prop("startDate").le().now().and()
+                                                                                        .prop("startDate").gt().extProp("startDate").model(); 
+                                                                                 
+    protected static final ExpressionModel currServiceStatus_ = expr().model(select(AssetServiceStatus.class).where()
+                                                                                         .prop("asset").eq().extProp("id").and()
+                                                                                         .prop("startDate").le().now().and()
+                                                                                         .notExists(SubQuery).model()).model();
+
+    @Observable  
+    public Asset setCurrServiceStatus(final AssetServiceStatus currAssetServiceStatus) {
+        this.currServiceStatus = currAssetServiceStatus;
+        return this;
+    }
+   
+    public AssetServiceStatus getCurrServiceStatus() {
+        return currServiceStatus;
+    }
+    
+    
+    
+//    @Observable
+//    public Asset setLoadingRate(final String loadingRate) {
+//        this.loadingRate = loadingRate;
+//        return this;
+//    }
+//
+//    public String getLoadingRate() {
+//        return loadingRate;
+//    }
 
     @Observable
     protected Asset setFinDet(final AssetFinDet finDet) {
@@ -103,23 +179,45 @@ public class Asset extends ActivatableAbstractEntity<DynamicEntityKey> {
         return number;
     }
     
-    public Asset setRegulatory(boolean isRegulatory) {
-        Asset.REGULATORY = isRegulatory;
+
+    @Observable
+    public Asset setRegulatory(final boolean regulatory) {
+        this.regulatory= regulatory;
         return this;
     }
-    
-    public Asset setKeyService(boolean isKeyService) {
-        Asset.KEY_SERVICE = isKeyService;
-        return this;
-    }
-    
+
+    @Observable
     public boolean getRegulatory() {
-        return Asset.REGULATORY;
+        return regulatory;
     }
-    
+
+    @Observable
+    public Asset setKeyService(final boolean keyService) {
+        this.keyService = keyService;
+        return this;
+    }
+
+    @Observable
     public boolean getKeyService() {
-        return Asset.KEY_SERVICE;
+        return keyService;
     }
+//    public Asset setRegulatory(boolean isRegulatory) {
+//        Asset.REGULATORY = isRegulatory;
+//        return this;
+//    }
+//    
+//    public Asset setKeyService(boolean isKeyService) {
+//        Asset.KEY_SERVICE = isKeyService;
+//        return this;
+//    }
+//    
+//    public boolean getRegulatory() {
+//        return Asset.REGULATORY;
+//    }
+//    
+//    public boolean getKeyService() {
+//        return Asset.KEY_SERVICE;
+//    }
 
     @Override
     @Observable

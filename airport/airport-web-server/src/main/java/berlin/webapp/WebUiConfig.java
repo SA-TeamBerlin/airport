@@ -9,6 +9,7 @@ import berlin.assets.AssetOverseeing;
 import berlin.assets.AssetOwnership;
 import berlin.config.personnel.PersonWebUiConfig;
 import berlin.tablecodes.assets.AssetClass;
+import berlin.tablecodes.assets.AssetServiceStatus;
 import berlin.tablecodes.assets.AssetType;
 import berlin.tablecodes.assets.AssetTypeMaintenance;
 import berlin.tablecodes.assets.AssetTypeOverseeing;
@@ -25,7 +26,9 @@ import berlin.webapp.config.assets.AssetOverseeingWebUiConfig;
 import berlin.webapp.config.assets.AssetOwnershipWebUiConfig;
 import berlin.webapp.config.assets.AssetWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetClassWebUiConfig;
+import berlin.webapp.config.tablecodes.assets.AssetServiceStatusWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeMaintenanceWebUiConfig;
+import berlin.webapp.config.tablecodes.assets.AssetServiceStatusWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeOverseeingWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeOwnershipWebUiConfig;
 import berlin.webapp.config.tablecodes.assets.AssetTypeWebUiConfig;
@@ -126,6 +129,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final OrganisationWebUiConfig organisationWebUiConfig = OrganisationWebUiConfig.register(injector(), builder);
         // Project related UI
         final ProjectWebUiConfig projectWebUiConfig = ProjectWebUiConfig.register(injector(), builder);
+        // Asset Service Status
+        final AssetServiceStatusWebUiConfig assetServiceStatusWebUiConfig = AssetServiceStatusWebUiConfig.register(injector(), builder);
+
+        
 
         // Configure application web resources such as masters and centres
         configApp()
@@ -149,8 +156,13 @@ public class WebUiConfig extends AbstractWebUiConfig {
                 .centre(assetWebUiConfig.centre).done()
                 .addMenuItem(AssetFinDet.ENTITY_TITLE).description(String.format("%s Centre", AssetFinDet.ENTITY_TITLE))
                 .centre(assetFinDetWebUiConfig.centre).done()
+                
+                .addMenuItem(AssetServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", AssetServiceStatus.ENTITY_TITLE))
+                .centre(assetServiceStatusWebUiConfig.centre).done()
+                
                 .addMenuItem(Project.ENTITY_TITLE).description(String.format("%s Centre", Project.ENTITY_TITLE)).centre(projectWebUiConfig.centre).done()
                 .done().done().
+                   
             addModule("Users / Personnel").
                 description("Provides functionality for managing application security and personnel data.").
                 icon("mainMenu:help").
@@ -193,6 +205,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     
                     .addMenuItem(ServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", ServiceStatus.ENTITY_TITLE))
                     .centre(serviceStatusWebUiConfig.centre).done()
+                    
+                    .addMenuItem(AssetServiceStatus.ENTITY_TITLE).description(String.format("%s Centre", AssetServiceStatus.ENTITY_TITLE))
+                    .centre(assetServiceStatusWebUiConfig.centre).done()
+                    
                     .addMenuItem(ConditionRating.ENTITY_TITLE).description(String.format("%s Centre", ConditionRating.ENTITY_TITLE))
                     .centre(conditionRatingWebUiConfig.centre).done()
                     .addMenuItem(Role.ENTITY_TITLE).description(String.format("%s Centre", Role.ENTITY_TITLE))

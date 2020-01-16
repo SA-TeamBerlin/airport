@@ -36,7 +36,7 @@ public class AssetTest extends AbstractDaoTestCase {
         final Asset asset1 = save(new_(Asset.class).setDesc("a demo asset 1"));
         final Asset asset2 = save(new_(Asset.class).setDesc("a demo asset 2"));
         final Asset asset3 = save(new_(Asset.class).setDesc("a demo asset 3"));
-        
+       
         final AssetFinDet finDet1 = co$(AssetFinDet.class).findById(asset1.getId(), IAssetFinDet.FETCH_PROVIDER.fetchModel());
         save(finDet1.setInitCost(Money.of("120.00")).setAcquireDate(date("2019-12-07 00:00:00")));
         final AssetFinDet finDet2 = co$(AssetFinDet.class).findById(asset2.getId(), IAssetFinDet.FETCH_PROVIDER.fetchModel());
